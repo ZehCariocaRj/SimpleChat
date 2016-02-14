@@ -1,0 +1,536 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Toy Chat Lang App API",
+    "description": "An API for a toy language learning-style chat application."
+  },
+  
+  "host": "localhost",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  
+  "paths": {
+    "/user": {
+      "post": {
+        "description": "Register new account.",
+        "operationId": "registerUser",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "New account's username",
+            "required": true,
+				"type": "string"
+          }, 
+          {
+            "name": "password",
+            "in": "query",
+            "description": "New account's password",
+            "required": true,
+				"type": "string"
+          }, 
+          {
+            "name": "email",
+            "in": "query",
+            "description": "New account's email",
+            "required": true,
+				"type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user creation response",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }, 
+      "delete": {
+        "description": "Delete account.",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "Token",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user delete response",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/user/{targetUserId}": {
+      "get": {
+        "description": "Get profile of target user.",
+        "operationId": "getProfileById",
+        "parameters": [
+          {
+            "name": "targetUserId",
+            "in": "path",
+            "description": "ID of target user",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "Token",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user profile response",
+            "schema": {
+			  "type": "array",
+			  "items": {
+                "$ref": "#/definitions/UserProfile"
+			  }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+	"/user/verify/{verificationHash}": {
+      "get": {
+        "description": "Verify a user's account.",
+        "operationId": "verifyUser",
+        "parameters": [
+          {
+            "name": "verificationHash",
+            "in": "path",
+            "description": "Verification hash of account",
+            "required": true,
+			"type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "verification response",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+	"/user/login": {
+      "post": {
+        "description": "Get a login token.",
+        "operationId": "loginUser",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "User's username",
+            "required": true,
+				"type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "User's password",
+            "required": true,
+				"type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "login response",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+  
+  
+  
+  
+    "/friends": {
+      "get": {
+        "description": "Get a list of all friends for the currently logged in user.",
+        "operationId": "getMyFriends",
+        "parameters": [
+          {
+            "name": "Token",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "friend response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Friend"
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Add friend to friend list of currently logged in user.",
+        "operationId": "addFriend",
+        "parameters": [
+          {
+            "name": "targetId",
+            "in": "query",
+            "description": "User ID of person to friend",
+            "required": true,
+			"type": "integer"
+          },
+          {
+            "name": "Token",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "friend response",
+            "schema": {
+              "$ref": "#/definitions/Friend"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete friend from friend list.",
+        "operationId": "deleteFriend",
+        "parameters": [
+          {
+            "name": "targetId",
+            "in": "query",
+            "description": "User ID of friend to delete",
+            "required": true,
+			"type": "integer"
+          },
+          {
+            "name": "Token",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "friend response",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+	
+    "/chat/manage": {
+      "post": {
+        "description": "Create a chat group.",
+        "operationId": "createChatGroup",
+        "parameters": [
+          {
+            "name": "userIds",
+            "in": "query",
+            "description": "IDs of users to be added to chat group",
+            "required": true,
+			  "type": "array",
+			  "items": {
+                "type": "integer"
+			  }
+          },
+          {
+            "name": "chatTitle",
+            "in": "query",
+            "description": "Name of chat group to be created",
+            "required": true,
+			"type": "string"
+          },
+          {
+            "name": "Token",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "create chat group response",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+	
+    "/chat": {
+      "post": {
+        "description": "Send a chat message.",
+        "operationId": "sendChatMessage",
+        "parameters": [
+          {
+            "name": "targetId",
+            "in": "query",
+            "description": "ID of target group",
+            "required": true,
+			"type": "integer"
+          },
+          {
+            "name": "message",
+            "in": "query",
+            "description": "Message to send",
+            "required": true,
+			"type": "string"
+          },
+          {
+            "name": "Token",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "chat response",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/chat/{targetGroupId}": {
+      "get": {
+        "description": "Get all chat messages from target group chat.",
+        "operationId": "getChatMessages",
+        "parameters": [
+          {
+            "name": "targetGroupId",
+            "in": "path",
+            "description": "ID of target group",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lastMessageId",
+            "in": "query",
+            "description": "ID of last message received",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "Token",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "chat response",
+            "schema": {
+			  "type": "array",
+			  "items": {
+                "$ref": "#/definitions/Message"
+			  }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  
+  "definitions": {
+    "Friend": {
+      "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+		  "id": {
+		    "type": "integer"
+		  }
+        }
+      },
+	
+	
+      "Chat": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+	      "chatTitle": {
+		    "type": "string"
+		  },
+		  "users": {
+			  "type": "array",
+			  "items": {
+                "type": "integer"
+			  }
+		  }
+        }
+      },
+	
+	
+      "Message": {
+        "type": "object",
+        "properties": {
+          "messageId": {
+            "type": "integer"
+          },
+          "chatId": {
+            "type": "integer"
+          },
+	      "userId": {
+		    "type": "integer"
+		  },
+		  "message": {
+		    "type": "string"
+		  },
+          "timestamp": {
+            "type": "string"
+          }
+        }
+      },
+	
+	
+      "UserProfile": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer"
+          },
+          "username": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        }
+      },
+	
+      "Error": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+}
