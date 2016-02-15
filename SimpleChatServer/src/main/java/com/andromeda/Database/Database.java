@@ -30,6 +30,8 @@ public class Database {
                 Properties connectionProps = new Properties();
                 connectionProps.put("user", Database.username);
                 connectionProps.put("password", Database.password);
+                connectionProps.setProperty("characterEncoding", "UTF-8");
+                connectionProps.setProperty("useUnicode", "true");
 
                 conn = DriverManager.getConnection("jdbc:mysql://" + Database.serverName + ":" + Database.portNumber + "/" + databaseName, connectionProps);
             }
