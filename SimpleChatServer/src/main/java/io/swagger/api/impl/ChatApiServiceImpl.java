@@ -30,7 +30,7 @@ public class ChatApiServiceImpl extends ChatApiService {
         if(currentUser == null) {
             Error error = new Error();
             error.setCode(800);
-            error.setMessage("Invalid token");
+            error.setMessage("Invalid token.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -39,7 +39,7 @@ public class ChatApiServiceImpl extends ChatApiService {
         if(sentMessage == null) {
             Error error = new Error();
             error.setCode(601);
-            error.setMessage("Could not send message to group");
+            error.setMessage("Could not send message to group.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -53,7 +53,7 @@ public class ChatApiServiceImpl extends ChatApiService {
         if(currentUser == null) {
             Error error = new Error();
             error.setCode(800);
-            error.setMessage("Invalid token");
+            error.setMessage("Invalid token.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -64,7 +64,7 @@ public class ChatApiServiceImpl extends ChatApiService {
         if(chatId == -1) {
             Error error = new Error();
             error.setCode(600);
-            error.setMessage("Could not create chat group");
+            error.setMessage("Could not create chat group.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -78,7 +78,7 @@ public class ChatApiServiceImpl extends ChatApiService {
         if(currentUser == null) {
             Error error = new Error();
             error.setCode(800);
-            error.setMessage("Invalid token");
+            error.setMessage("Invalid token.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -92,7 +92,7 @@ public class ChatApiServiceImpl extends ChatApiService {
         if(messages == null) {
             Error error = new Error();
             error.setCode(603);
-            error.setMessage("Could not get messages");
+            error.setMessage("Could not get messages.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 

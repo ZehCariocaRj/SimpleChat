@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
              Padding="4,10,4,10"
-             Width="200">
+             Width="200"
+             FocusManager.FocusedElement="{Binding ElementName=UsernameInput}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100*"/>
@@ -30,7 +31,7 @@
 
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
             <Label Content="Username" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding Username}"/>
+            <TextBox Name="UsernameInput" TextWrapping="Wrap" Text="{Binding Username}"/>
         </StackPanel>
         
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2">
@@ -51,7 +52,7 @@
 
         <StackPanel Grid.Row="6" Grid.ColumnSpan="2">
             <TextBlock Height="8"></TextBlock>
-            <Button Content="Register" Name="RegsterButton" Command="{Binding PerformRegisterCommand}" Padding="0,4,0,4"/>
+            <Button IsDefault="True" Content="Register" Name="RegsterButton" Command="{Binding PerformRegisterCommand}" Padding="0,4,0,4"/>
             <Button Content="Back" Command="{Binding GoBackViewCommand}" Padding="0,4,0,4"/>
         </StackPanel>
     </Grid>

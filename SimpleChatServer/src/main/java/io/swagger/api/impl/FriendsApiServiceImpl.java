@@ -32,7 +32,7 @@ public class FriendsApiServiceImpl extends FriendsApiService {
         if(currentUser == null) {
             Error error = new Error();
             error.setCode(800);
-            error.setMessage("Invalid token");
+            error.setMessage("Invalid token.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -47,15 +47,34 @@ public class FriendsApiServiceImpl extends FriendsApiService {
         if(currentUser == null) {
             Error error = new Error();
             error.setCode(800);
-            error.setMessage("Invalid token");
+            error.setMessage("Invalid token.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
-        Boolean status = Database.addFriend(currentUser.getUserId(), username, RelationshipStatus.Friend);
-        if(status == false) {
+        if(username.equals(currentUser.getUsername())) {
+            Error error = new Error();
+            error.setCode(403);
+            error.setMessage("Can't add self as friend.");
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
+        }
+
+        int status = Database.addFriend(currentUser.getUserId(), username, RelationshipStatus.Friend);
+        if(status == 0) {
             Error error = new Error();
             error.setCode(400);
-            error.setMessage("Could not add friend");
+            error.setMessage("Could not add friend.");
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
+        }
+        else if(status == -1) {
+            Error error = new Error();
+            error.setCode(402);
+            error.setMessage("Friend already exists.");
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
+        }
+        else if(status == -2) {
+            Error error = new Error();
+            error.setCode(403);
+            error.setMessage("User does not exist.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -69,7 +88,7 @@ public class FriendsApiServiceImpl extends FriendsApiService {
         if(currentUser == null) {
             Error error = new Error();
             error.setCode(800);
-            error.setMessage("Invalid token");
+            error.setMessage("Invalid token.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -77,7 +96,7 @@ public class FriendsApiServiceImpl extends FriendsApiService {
         if(status == false) {
             Error error = new Error();
             error.setCode(401);
-            error.setMessage("Could not delete friend");
+            error.setMessage("Could not delete friend.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 

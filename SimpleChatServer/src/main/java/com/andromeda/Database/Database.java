@@ -247,8 +247,8 @@ public class Database {
         return result;
     }
 
-    public static Boolean addFriend(int userId, String targetUsername, int status) {
-        Boolean result = false;
+    public static int addFriend(int userId, String targetUsername, int status) {
+        int result = 0;
 
         Connection conn = getConnection();
         if (conn == null)
@@ -257,18 +257,35 @@ public class Database {
         try {
             int targetId = getUserIdFromUsername(targetUsername);
 
+            if(targetId == -1) {
+                result = -2;
+                return result;
+            }
+
             PreparedStatement statement = null;
 
-            statement = conn.prepareStatement("INSERT INTO relationships (sourceid, targetid, status) VALUES (?,?,?) ON DUPLICATE KEY UPDATE sourceid=?, targetid=?, status=?");
+            // Check if friend already exists
+            statement = conn.prepareStatement("SELECT COUNT(*) FROM relationships WHERE sourceId = ? AND targetId = ?");
             statement.setInt(1, userId);
             statement.setInt(2, targetId);
-            statement.setInt(3, status);
-            statement.setInt(4, userId);
-            statement.setInt(5, targetId);
-            statement.setInt(6, status);
-            statement.executeUpdate();
 
-            result = true;
+            ResultSet results = statement.executeQuery();
+            results.next();
+
+            if(results.getInt(1) > 0) {
+                result = -1;
+            } else {
+                statement = conn.prepareStatement("INSERT INTO relationships (sourceid, targetid, status) VALUES (?,?,?) ON DUPLICATE KEY UPDATE sourceid=?, targetid=?, status=?");
+                statement.setInt(1, userId);
+                statement.setInt(2, targetId);
+                statement.setInt(3, status);
+                statement.setInt(4, userId);
+                statement.setInt(5, targetId);
+                statement.setInt(6, status);
+                statement.executeUpdate();
+
+                result = 1;
+            }
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -317,8 +334,6 @@ public class Database {
                 ResultSet results = statement.executeQuery();
                 results.next();
 
-
-                System.out.println("New username: " + username + ", found " + results.getInt(1)  + " instances");
                 if(results.getInt(1) == 1) {
                     found = -1; // Writeout new username because of erro
                     ret = -1;
@@ -472,10 +487,6 @@ public class Database {
                 Timestamp expiryDate = new Timestamp(creationDate.getTime() + delta);
                 Timestamp curTimestamp = new Timestamp(new java.util.Date().getTime());
 
-                System.out.println(creationDate);
-                System.out.println(expiryDate);
-                System.out.println(curTimestamp);
-
                 if (curTimestamp.after(expiryDate)) {
                     // Expired token, delete from database
 
@@ -494,8 +505,6 @@ public class Database {
         } catch(Exception e) {
             System.out.println(e);
         }
-
-        System.out.println(user);
 
         return user;
     }

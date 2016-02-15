@@ -89,11 +89,8 @@ namespace SimpleChatClientWPF.ViewModels
         {
             if (_friendList != null)
             {
-                // Test data for now
-                // TODO: Replace with a dialog asking the user who input a username.
-                AccountManager.AddFriend("testaccount");
-                AccountManager.AddFriend("testaccount2");
-                AccountManager.AddFriend("polaris1");
+                var addFriendDialog = new Views.AddFriendDialog();
+                var res = addFriendDialog.ShowDialog();
 
                 UpdateFriendList();
             }

@@ -64,7 +64,7 @@
 
         <StackPanel Grid.Row="8" Grid.ColumnSpan="2">
             <TextBlock Height="8"></TextBlock>
-            <Button Content="Save" Name="SaveButton" Command="{Binding PerformSaveCommand}" Padding="0,4,0,4"/>
+            <Button IsDefault="True" Content="Save" Name="SaveButton" Command="{Binding PerformSaveCommand}" Padding="0,4,0,4"/>
             <Button Content="Back" Command="{Binding GoBackViewCommand}" Padding="0,4,0,4"/>
         </StackPanel>
     </Grid>

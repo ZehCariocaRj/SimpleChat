@@ -28,7 +28,7 @@ namespace SimpleChatClientWPF
         [XmlElement("AutomaticSignIn")]
         public bool AutomaticSignIn;
 
-        [XmlElement("RemmeberPassword")]
+        [XmlElement("RememberPassword")]
         public bool RememberPassword;
     }
 
@@ -240,17 +240,9 @@ namespace SimpleChatClientWPF
 
         public static IO.Swagger.Model.Friend AddFriend(string username)
         {
-            try
-            {
-                AccountManager lm = AccountManager.GetInstance();
-                DefaultApi api = new DefaultApi("http://localhost:8080/api/");
-                return api.AddFriend(username, lm.Token);
-            }
-            catch (ApiException e)
-            {
-            }
-
-            return null;
+            AccountManager lm = AccountManager.GetInstance();
+            DefaultApi api = new DefaultApi("http://localhost:8080/api/");
+            return api.AddFriend(username, lm.Token);
         }
 
         public static bool DeleteFriend(int id)

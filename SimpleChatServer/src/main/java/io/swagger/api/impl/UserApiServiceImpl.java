@@ -30,7 +30,7 @@ public class UserApiServiceImpl extends UserApiService {
         if(currentUser == null) {
             Error error = new Error();
             error.setCode(800);
-            error.setMessage("Invalid token");
+            error.setMessage("Invalid token.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -46,7 +46,7 @@ public class UserApiServiceImpl extends UserApiService {
         if(exists) {
             Error error = new Error();
             error.setCode(100);
-            error.setMessage("Username already exists");
+            error.setMessage("Username already exists.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -61,7 +61,7 @@ public class UserApiServiceImpl extends UserApiService {
         if(currentUser == null) {
             Error error = new Error();
             error.setCode(800);
-            error.setMessage("Invalid token");
+            error.setMessage("Invalid token.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -70,7 +70,7 @@ public class UserApiServiceImpl extends UserApiService {
         if(!success) {
             Error error = new Error();
             error.setCode(203);
-            error.setMessage("Could not delete account");
+            error.setMessage("Could not delete account.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -84,7 +84,7 @@ public class UserApiServiceImpl extends UserApiService {
         if(currentUser == null) {
             Error error = new Error();
             error.setCode(800);
-            error.setMessage("Invalid token");
+            error.setMessage("Invalid token.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -99,13 +99,13 @@ public class UserApiServiceImpl extends UserApiService {
         if(ret == 0) {
             Error error = new Error();
             error.setCode(204);
-            error.setMessage("Could not update account information");
+            error.setMessage("Could not update account information.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
         else if(ret == -1) {
             Error error = new Error();
             error.setCode(205);
-            error.setMessage("Could not change account name");
+            error.setMessage("Could not change account name.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -119,7 +119,7 @@ public class UserApiServiceImpl extends UserApiService {
         if(token == null) {
             Error error = new Error();
             error.setCode(200);
-            error.setMessage("Invalid username/password combination");
+            error.setMessage("Invalid username/password combination.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -133,7 +133,7 @@ public class UserApiServiceImpl extends UserApiService {
         if(!verified) {
             Error error = new Error();
             error.setCode(201);
-            error.setMessage("Could not verify account");
+            error.setMessage("Could not verify account.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -147,7 +147,7 @@ public class UserApiServiceImpl extends UserApiService {
         if(currentUser == null) {
             Error error = new Error();
             error.setCode(800);
-            error.setMessage("Invalid token");
+            error.setMessage("Invalid token.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
@@ -155,7 +155,7 @@ public class UserApiServiceImpl extends UserApiService {
         if(profile == null) {
             Error error = new Error();
             error.setCode(202);
-            error.setMessage("Invalid account");
+            error.setMessage("Invalid account.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
