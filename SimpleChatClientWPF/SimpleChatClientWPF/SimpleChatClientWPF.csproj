@@ -88,6 +88,9 @@
     <Compile Include="ViewModels\ViewPresenter.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="Views\FriendListEntry.xaml.cs">
+      <DependentUpon>FriendListEntry.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FriendListView.xaml.cs">
       <DependentUpon>FriendListView.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FriendListEntry.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

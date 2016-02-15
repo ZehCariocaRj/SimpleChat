@@ -28,7 +28,7 @@ import javax.ws.rs.*;
 @Consumes({ "application/json" })
 @Produces({ "application/json" })
 @io.swagger.annotations.Api(description = "the chat API")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-14T15:47:18.699-05:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-14T22:40:24.503-05:00")
 public class ChatApi  {
    private final ChatApiService delegate = ChatApiServiceFactory.getChatApi();
 
@@ -39,6 +39,8 @@ public class ChatApi  {
     @io.swagger.annotations.ApiOperation(value = "", notes = "Send a chat message.", response = Message.class, tags={  })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "chat response", response = Message.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 304, message = "Invalid token", response = Message.class),
         
         @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = Message.class) })
 
@@ -57,6 +59,8 @@ public class ChatApi  {
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "create chat group response", response = Integer.class),
         
+        @io.swagger.annotations.ApiResponse(code = 304, message = "Invalid token", response = Integer.class),
+        
         @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = Integer.class) })
 
     public Response createChatGroup(@ApiParam(value = "IDs of users to be added to chat group",required=true) @QueryParam("userIds") List<Integer> userIds
@@ -73,6 +77,8 @@ public class ChatApi  {
     @io.swagger.annotations.ApiOperation(value = "", notes = "Get all chat messages from target group chat.", response = Message.class, responseContainer = "List", tags={  })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "chat response", response = Message.class, responseContainer = "List"),
+        
+        @io.swagger.annotations.ApiResponse(code = 304, message = "Invalid token", response = Message.class, responseContainer = "List"),
         
         @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = Message.class, responseContainer = "List") })
 

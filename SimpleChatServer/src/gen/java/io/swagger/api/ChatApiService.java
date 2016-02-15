@@ -19,7 +19,7 @@ import com.sun.jersey.multipart.FormDataParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-14T15:47:18.699-05:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-14T22:40:24.503-05:00")
 public abstract class ChatApiService {
   
       public abstract Response sendChatMessage(Integer targetId,String message,String token,SecurityContext securityContext)

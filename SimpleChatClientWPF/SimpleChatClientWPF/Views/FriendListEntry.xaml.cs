@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,20 +16,22 @@ using System.Windows.Shapes;
 namespace SimpleChatClientWPF.Views
 {
     /// <summary>
-    /// Interaction logic for FriendListView.xaml
+    /// Interaction logic for FriendListEntry.xaml
     /// </summary>
-    public partial class FriendListView : UserControl
+    public partial class FriendListEntry : UserControl
     {
-        ViewModels.FriendListViewModel friendListViewModel;
-        public FriendListView()
+        public FriendListEntry()
         {
             InitializeComponent();
+        }
 
-            friendListViewModel = new ViewModels.FriendListViewModel();
-            friendListViewModel.SetListBox(FriendList);
-            DataContext = friendListViewModel;
-
-            friendListViewModel.UpdateFriendList();
+        public int UserId = -1;
+        public FriendListEntry(int id, string displayName, string username)
+        {
+            InitializeComponent();
+            UserId = id;
+            DisplayName.Text = displayName;
+            Username.Text = username;
         }
     }
 }

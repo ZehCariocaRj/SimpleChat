@@ -5,8 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleChatClientWPF.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="300" d:DesignWidth="300"
+             Height="300">
+    <ListBox Name="FriendList" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Add" Command="{Binding AddFriendCommand}"></MenuItem>
+                <MenuItem Header="Delete" Command="{Binding DeleteFriendCommand}"></MenuItem>
+            </ContextMenu>
+        </ListBox.ContextMenu>
+        <ScrollViewer Content="{Binding Friends}">
+        </ScrollViewer>
+    </ListBox>
 </UserControl>

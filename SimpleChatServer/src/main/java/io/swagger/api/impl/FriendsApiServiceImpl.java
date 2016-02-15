@@ -41,7 +41,7 @@ public class FriendsApiServiceImpl extends FriendsApiService {
     }
     
     @Override
-    public Response addFriend(Integer targetId, String token, SecurityContext securityContext)
+    public Response addFriend(String username, String token, SecurityContext securityContext)
     throws NotFoundException {
         UserProfile currentUser = Database.verifyToken(token);
         if(currentUser == null) {
@@ -51,7 +51,7 @@ public class FriendsApiServiceImpl extends FriendsApiService {
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
-        Boolean status = Database.addFriend(currentUser.getUserId(), targetId, RelationshipStatus.Friend);
+        Boolean status = Database.addFriend(currentUser.getUserId(), username, RelationshipStatus.Friend);
         if(status == false) {
             Error error = new Error();
             error.setCode(400);

@@ -247,7 +247,7 @@ public class Database {
         return result;
     }
 
-    public static Boolean addFriend(int userId, int targetId, int status) {
+    public static Boolean addFriend(int userId, String targetUsername, int status) {
         Boolean result = false;
 
         Connection conn = getConnection();
@@ -255,6 +255,8 @@ public class Database {
             return result;
 
         try {
+            int targetId = getUserIdFromUsername(targetUsername);
+
             PreparedStatement statement = null;
 
             statement = conn.prepareStatement("INSERT INTO relationships (sourceid, targetid, status) VALUES (?,?,?) ON DUPLICATE KEY UPDATE sourceid=?, targetid=?, status=?");

@@ -151,8 +151,7 @@ namespace SimpleChatClientWPF.ViewModels
                 ErrorMessage = error.Message;
             }
         }
-
-
+        
         public ICommand GoBackViewCommand
         {
             get

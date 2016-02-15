@@ -206,10 +206,10 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// Add friend to friend list of currently logged in user.
         /// </remarks>
-        /// <param name="targetId">User ID of person to friend</param>
+        /// <param name="username">Username of person to friend</param>
         /// <param name="token">Authentication token</param>
         /// <returns>Friend</returns>
-        Friend AddFriend (int? targetId, string token);
+        Friend AddFriend (string username, string token);
   
         /// <summary>
         /// 
@@ -217,10 +217,10 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// Add friend to friend list of currently logged in user.
         /// </remarks>
-        /// <param name="targetId">User ID of person to friend</param>
+        /// <param name="username">Username of person to friend</param>
         /// <param name="token">Authentication token</param>
         /// <returns>ApiResponse of Friend</returns>
-        ApiResponse<Friend> AddFriendWithHttpInfo (int? targetId, string token);
+        ApiResponse<Friend> AddFriendWithHttpInfo (string username, string token);
 
         /// <summary>
         /// 
@@ -228,10 +228,10 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// Add friend to friend list of currently logged in user.
         /// </remarks>
-        /// <param name="targetId">User ID of person to friend</param>
+        /// <param name="username">Username of person to friend</param>
         /// <param name="token">Authentication token</param>
         /// <returns>Task of Friend</returns>
-        System.Threading.Tasks.Task<Friend> AddFriendAsync (int? targetId, string token);
+        System.Threading.Tasks.Task<Friend> AddFriendAsync (string username, string token);
 
         /// <summary>
         /// 
@@ -239,10 +239,10 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// Add friend to friend list of currently logged in user.
         /// </remarks>
-        /// <param name="targetId">User ID of person to friend</param>
+        /// <param name="username">Username of person to friend</param>
         /// <param name="token">Authentication token</param>
         /// <returns>Task of ApiResponse (Friend)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Friend>> AddFriendAsyncWithHttpInfo (int? targetId, string token);
+        System.Threading.Tasks.Task<ApiResponse<Friend>> AddFriendAsyncWithHttpInfo (string username, string token);
         
         /// <summary>
         /// 
@@ -1269,27 +1269,27 @@ namespace IO.Swagger.Api
         /// <summary>
         ///  Add friend to friend list of currently logged in user.
         /// </summary>
-        /// <param name="targetId">User ID of person to friend</param> 
+        /// <param name="username">Username of person to friend</param> 
         /// <param name="token">Authentication token</param> 
         /// <returns>Friend</returns>
-        public Friend AddFriend (int? targetId, string token)
+        public Friend AddFriend (string username, string token)
         {
-             ApiResponse<Friend> response = AddFriendWithHttpInfo(targetId, token);
+             ApiResponse<Friend> response = AddFriendWithHttpInfo(username, token);
              return response.Data;
         }
 
         /// <summary>
         ///  Add friend to friend list of currently logged in user.
         /// </summary>
-        /// <param name="targetId">User ID of person to friend</param> 
+        /// <param name="username">Username of person to friend</param> 
         /// <param name="token">Authentication token</param> 
         /// <returns>ApiResponse of Friend</returns>
-        public ApiResponse< Friend > AddFriendWithHttpInfo (int? targetId, string token)
+        public ApiResponse< Friend > AddFriendWithHttpInfo (string username, string token)
         {
             
-            // verify the required parameter 'targetId' is set
-            if (targetId == null)
-                throw new ApiException(400, "Missing required parameter 'targetId' when calling DefaultApi->AddFriend");
+            // verify the required parameter 'username' is set
+            if (username == null)
+                throw new ApiException(400, "Missing required parameter 'username' when calling DefaultApi->AddFriend");
             
             // verify the required parameter 'token' is set
             if (token == null)
@@ -1323,7 +1323,7 @@ namespace IO.Swagger.Api
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
             pathParams.Add("format", "json");
             
-            if (targetId != null) queryParams.Add("targetId", Configuration.ApiClient.ParameterToString(targetId)); // query parameter
+            if (username != null) queryParams.Add("username", Configuration.ApiClient.ParameterToString(username)); // query parameter
             
             if (token != null) headerParams.Add("Token", Configuration.ApiClient.ParameterToString(token)); // header parameter
             
@@ -1353,12 +1353,12 @@ namespace IO.Swagger.Api
         /// <summary>
         ///  Add friend to friend list of currently logged in user.
         /// </summary>
-        /// <param name="targetId">User ID of person to friend</param>
+        /// <param name="username">Username of person to friend</param>
         /// <param name="token">Authentication token</param>
         /// <returns>Task of Friend</returns>
-        public async System.Threading.Tasks.Task<Friend> AddFriendAsync (int? targetId, string token)
+        public async System.Threading.Tasks.Task<Friend> AddFriendAsync (string username, string token)
         {
-             ApiResponse<Friend> response = await AddFriendAsyncWithHttpInfo(targetId, token);
+             ApiResponse<Friend> response = await AddFriendAsyncWithHttpInfo(username, token);
              return response.Data;
 
         }
@@ -1366,13 +1366,13 @@ namespace IO.Swagger.Api
         /// <summary>
         ///  Add friend to friend list of currently logged in user.
         /// </summary>
-        /// <param name="targetId">User ID of person to friend</param>
+        /// <param name="username">Username of person to friend</param>
         /// <param name="token">Authentication token</param>
         /// <returns>Task of ApiResponse (Friend)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Friend>> AddFriendAsyncWithHttpInfo (int? targetId, string token)
+        public async System.Threading.Tasks.Task<ApiResponse<Friend>> AddFriendAsyncWithHttpInfo (string username, string token)
         {
-            // verify the required parameter 'targetId' is set
-            if (targetId == null) throw new ApiException(400, "Missing required parameter 'targetId' when calling AddFriend");
+            // verify the required parameter 'username' is set
+            if (username == null) throw new ApiException(400, "Missing required parameter 'username' when calling AddFriend");
             // verify the required parameter 'token' is set
             if (token == null) throw new ApiException(400, "Missing required parameter 'token' when calling AddFriend");
             
@@ -1404,7 +1404,7 @@ namespace IO.Swagger.Api
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
             pathParams.Add("format", "json");
             
-            if (targetId != null) queryParams.Add("targetId", Configuration.ApiClient.ParameterToString(targetId)); // query parameter
+            if (username != null) queryParams.Add("username", Configuration.ApiClient.ParameterToString(username)); // query parameter
             
             if (token != null) headerParams.Add("Token", Configuration.ApiClient.ParameterToString(token)); // header parameter
             

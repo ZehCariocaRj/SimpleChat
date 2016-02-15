@@ -28,7 +28,7 @@ import javax.ws.rs.*;
 @Consumes({ "application/json" })
 @Produces({ "application/json" })
 @io.swagger.annotations.Api(description = "the user API")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-14T15:47:18.699-05:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-14T22:40:24.503-05:00")
 public class UserApi  {
    private final UserApiService delegate = UserApiServiceFactory.getUserApi();
 
@@ -39,6 +39,8 @@ public class UserApi  {
     @io.swagger.annotations.ApiOperation(value = "", notes = "Register new account.", response = String.class, tags={  })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "user creation response", response = String.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 304, message = "Invalid token", response = String.class),
         
         @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = String.class) })
 
@@ -57,6 +59,8 @@ public class UserApi  {
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "user delete response", response = Boolean.class),
         
+        @io.swagger.annotations.ApiResponse(code = 304, message = "Invalid token", response = Boolean.class),
+        
         @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = Boolean.class) })
 
     public Response deleteUser(
@@ -71,6 +75,8 @@ public class UserApi  {
     @io.swagger.annotations.ApiOperation(value = "", notes = "Get a login token.", response = String.class, tags={  })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "login response", response = String.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 304, message = "Invalid token", response = String.class),
         
         @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = String.class) })
 
@@ -88,6 +94,8 @@ public class UserApi  {
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "verification response", response = Boolean.class),
         
+        @io.swagger.annotations.ApiResponse(code = 304, message = "Invalid token", response = Boolean.class),
+        
         @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = Boolean.class) })
 
     public Response verifyUser(
@@ -102,6 +110,8 @@ public class UserApi  {
     @io.swagger.annotations.ApiOperation(value = "", notes = "Get profile of target user.", response = UserProfile.class, responseContainer = "List", tags={  })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "user profile response", response = UserProfile.class, responseContainer = "List"),
+        
+        @io.swagger.annotations.ApiResponse(code = 304, message = "Invalid token", response = UserProfile.class, responseContainer = "List"),
         
         @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = UserProfile.class, responseContainer = "List") })
 

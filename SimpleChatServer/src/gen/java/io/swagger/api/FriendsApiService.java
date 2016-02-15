@@ -19,13 +19,13 @@ import com.sun.jersey.multipart.FormDataParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-14T15:47:18.699-05:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-14T22:40:24.503-05:00")
 public abstract class FriendsApiService {
   
       public abstract Response getMyFriends(String token,SecurityContext securityContext)
       throws NotFoundException;
   
-      public abstract Response addFriend(Integer targetId,String token,SecurityContext securityContext)
+      public abstract Response addFriend(String username,String token,SecurityContext securityContext)
       throws NotFoundException;
   
       public abstract Response deleteFriend(Integer targetId,String token,SecurityContext securityContext)

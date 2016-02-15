@@ -10,6 +10,7 @@ using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 using IO.Swagger.Api;
+using IO.Swagger.Client;
 
 namespace SimpleChatClientWPF
 {
@@ -153,6 +154,54 @@ namespace SimpleChatClientWPF
             DefaultApi api = new DefaultApi("http://localhost:8080/api/");
             var result = api.RegisterUserWithHttpInfo(username, password, email);
             return result.Data == "true";
+        }
+
+        public static List<IO.Swagger.Model.Friend> GetFriendList()
+        {
+            List<IO.Swagger.Model.Friend> friends = new List<IO.Swagger.Model.Friend>();
+
+            try
+            {
+                LoginManager lm = LoginManager.GetInstance();
+                DefaultApi api = new DefaultApi("http://localhost:8080/api/");
+                friends = api.GetMyFriends(lm.Token);
+            }
+            catch (ApiException e)
+            {
+
+            }
+
+            return friends;
+        }
+
+        public static IO.Swagger.Model.Friend AddFriend(string username)
+        {
+            try
+            {
+                LoginManager lm = LoginManager.GetInstance();
+                DefaultApi api = new DefaultApi("http://localhost:8080/api/");
+                return api.AddFriend(username, lm.Token);
+            }
+            catch (ApiException e)
+            {
+            }
+
+            return null;
+        }
+
+        public static bool DeleteFriend(int id)
+        {
+            try
+            {
+                LoginManager lm = LoginManager.GetInstance();
+                DefaultApi api = new DefaultApi("http://localhost:8080/api/");
+                return api.DeleteFriend(id, lm.Token).Value;
+            }
+            catch (ApiException e)
+            {
+            }
+
+            return false;
         }
     }
 }

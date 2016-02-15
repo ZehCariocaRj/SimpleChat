@@ -270,11 +270,11 @@
         "operationId": "addFriend",
         "parameters": [
           {
-            "name": "targetId",
+            "name": "username",
             "in": "query",
-            "description": "User ID of person to friend",
+            "description": "Username of person to friend",
             "required": true,
-			"type": "integer"
+			"type": "string"
           },
           {
             "name": "Token",
