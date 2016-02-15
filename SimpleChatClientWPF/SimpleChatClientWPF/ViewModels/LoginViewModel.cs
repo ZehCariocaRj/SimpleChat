@@ -25,7 +25,7 @@ namespace SimpleChatClientWPF.ViewModels
 
         public void PopulateAccountInfo()
         {
-            var lm = LoginManager.GetInstance(); // Force the login manager to load the current stored login information if available
+            var lm = AccountManager.GetInstance(); // Force the login manager to load the current stored login information if available
 
             Username = lm.Username;
             Password = lm.Password;
@@ -79,25 +79,25 @@ namespace SimpleChatClientWPF.ViewModels
         {
             get
             {
-                return LoginManager.GetInstance().AutomaticSignIn;
+                return AccountManager.GetInstance().AutomaticSignIn;
             }
             set
             {
-                LoginManager.GetInstance().AutomaticSignIn = value;
+                AccountManager.GetInstance().AutomaticSignIn = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("AutomaticSignIn"));
             }
         }
 
-        public bool RemmeberPassword
+        public bool RememberPassword
         {
             get
             {
-                return LoginManager.GetInstance().RememberPassword;
+                return AccountManager.GetInstance().RememberPassword;
             }
             set
             {
-                LoginManager.GetInstance().RememberPassword = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("RemmeberPassword"));
+                AccountManager.GetInstance().RememberPassword = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("RememberPassword"));
             }
         }
 
@@ -127,7 +127,7 @@ namespace SimpleChatClientWPF.ViewModels
 
             try
             {
-                if(LoginManager.LoginUser(Username, Password))
+                if(AccountManager.LoginUser(Username, Password))
                 {
                     // Login was successful, move to friend list
                     ViewPresenter.PushView(new Views.FriendListView());

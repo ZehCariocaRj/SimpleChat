@@ -299,6 +299,80 @@ public class Database {
         return result;
     }
 
+    public static int updateUser(int userId, String username, String password, String email, String displayName) {
+        int ret = 0;
+
+        Connection conn = getConnection();
+        if (conn == null)
+            return ret;
+
+        try {
+            PreparedStatement statement = null;
+            int found = 0; // Write without username by default
+
+            if(username != null) {
+                statement = conn.prepareStatement("SELECT COUNT(*) FROM users WHERE username = ?");
+                statement.setString(1, username);
+
+                ResultSet results = statement.executeQuery();
+                results.next();
+
+
+                System.out.println("New username: " + username + ", found " + results.getInt(1)  + " instances");
+                if(results.getInt(1) == 1) {
+                    found = -1; // Writeout new username because of erro
+                    ret = -1;
+                }
+                else {
+                    found = 1;
+                    ret = 1;
+                }
+            } else {
+                ret = 1;
+            }
+
+            statement = conn.prepareStatement("UPDATE userprofiles SET displayname=? WHERE userid = ?");
+            statement.setString(1, displayName);
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+
+            if(found == 1){
+                if(password == null) {
+                    statement = conn.prepareStatement("UPDATE users SET username=?, email=? WHERE userid = ?");
+                    statement.setString(1, username);
+                    statement.setString(2, email);
+                    statement.setInt(3, userId);
+                } else {
+                    statement = conn.prepareStatement("UPDATE users SET username=?, email=?, password=? WHERE userid = ?");
+                    statement.setString(1, username);
+                    statement.setString(2, email);
+                    statement.setString(3, password);
+                    statement.setInt(4, userId);
+                }
+
+                statement.executeUpdate();
+            } else {
+                // Username exists, don't modify username
+                if(password == null) {
+                    statement = conn.prepareStatement("UPDATE users SET email=? WHERE userid = ?");
+                    statement.setString(1, email);
+                    statement.setInt(2, userId);
+                } else {
+                    statement = conn.prepareStatement("UPDATE users SET email=?, password=? WHERE userid = ?");
+                    statement.setString(1, email);
+                    statement.setString(2, password);
+                    statement.setInt(3, userId);
+                }
+
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return ret;
+    }
+
     public static Boolean verifyUser(String verificationHash) {
         Boolean success = false;
 
@@ -391,7 +465,6 @@ public class Database {
 
             // Must return exactly one match to be valid
             Boolean valid = results.getInt(1) == 1;
-
 
             if(valid) {
                 long delta = ((24 * 60) + 0) * 1000; // 6 hours and 0 minutes

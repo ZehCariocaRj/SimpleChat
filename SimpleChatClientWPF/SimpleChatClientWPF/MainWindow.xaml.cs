@@ -23,7 +23,7 @@ namespace SimpleChatClientWPF
         public MainWindow()
         {
             InitializeComponent();
-            LoginManager.GetInstance(); // Force the login manager to load the current stored login information if available
+            AccountManager.GetInstance(); // Force the login manager to load the current stored login information if available
         }
 
         private void MainWindow_OnLoad(object sender, RoutedEventArgs e)

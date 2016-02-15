@@ -9,5 +9,7 @@ namespace SimpleChatClientWPF.Models
 {
     class FriendListModel
     {
+        public string MyUsername { get; set; }
+        public string MyDisplayName { get; set; }
     }
 }

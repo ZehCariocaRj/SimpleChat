@@ -25,6 +25,39 @@ namespace SimpleChatClientWPF.ViewModels
             friendList = new Models.FriendListModel();
         }
 
+        internal void UpdateProfile()
+        {
+            // Force fields to be updated
+            MyUsername = MyUsername;
+            MyDisplayName = MyDisplayName;
+        }
+
+        public string MyUsername
+        {
+            get
+            {
+                return AccountManager.GetInstance().Username;
+            }
+            set
+            {
+                AccountManager.GetInstance().Username = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("MyUsername"));
+            }
+        }
+
+        public string MyDisplayName
+        {
+            get
+            {
+                return AccountManager.GetInstance().DisplayName;
+            }
+            set
+            {
+                AccountManager.GetInstance().DisplayName = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("MyDisplayName"));
+            }
+        }
+
         public ICommand DeleteFriendCommand
         {
             get
@@ -38,7 +71,7 @@ namespace SimpleChatClientWPF.ViewModels
             if (_friendList != null && _friendList.SelectedItem != null)
             {
                 Views.FriendListEntry friend = (Views.FriendListEntry)_friendList.SelectedItem;
-                LoginManager.DeleteFriend(friend.UserId);
+                AccountManager.DeleteFriend(friend.UserId);
 
                 UpdateFriendList();
             }
@@ -57,10 +90,10 @@ namespace SimpleChatClientWPF.ViewModels
             if (_friendList != null)
             {
                 // Test data for now
-                // TODO: Replace with a dialog asking the user who input a username
-                LoginManager.AddFriend("testaccount");
-                LoginManager.AddFriend("testaccount2");
-                LoginManager.AddFriend("polaris1");
+                // TODO: Replace with a dialog asking the user who input a username.
+                AccountManager.AddFriend("testaccount");
+                AccountManager.AddFriend("testaccount2");
+                AccountManager.AddFriend("polaris1");
 
                 UpdateFriendList();
             }
@@ -78,7 +111,7 @@ namespace SimpleChatClientWPF.ViewModels
             {
                 _friendList.Items.Clear();
 
-                var friends = LoginManager.GetFriendList();
+                var friends = AccountManager.GetFriendList();
                 for (int i = 0; i < friends.Count; i++)
                 {
                     var friend = new Views.FriendListEntry(friends[i].Id.Value, friends[i].DisplayName, friends[i].Username);
@@ -91,6 +124,19 @@ namespace SimpleChatClientWPF.ViewModels
         private void Friend_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             MessageBox.Show("Open chat window");
+        }
+
+        public ICommand OptionsViewCommand
+        {
+            get
+            {
+                return new DelegateCommand(OptionsView);
+            }
+        }
+
+        private void OptionsView()
+        {
+            ViewPresenter.PushView(new Views.OptionsView());
         }
     }
 }

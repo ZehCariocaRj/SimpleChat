@@ -22,7 +22,22 @@ import javax.ws.rs.core.SecurityContext;
 
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-13T07:37:36.259-05:00")
 public class UserApiServiceImpl extends UserApiService {
-    
+
+    @Override
+    public Response getMyProfile(String token, SecurityContext securityContext)
+            throws NotFoundException {
+        UserProfile currentUser = Database.verifyToken(token);
+        if(currentUser == null) {
+            Error error = new Error();
+            error.setCode(800);
+            error.setMessage("Invalid token");
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
+        }
+
+        UserProfile profile = Database.getProfileById(currentUser.getUserId());
+        return Response.ok(profile).build();
+    }
+
     @Override
     public Response registerUser(String username, String password, String email, SecurityContext securityContext)
     throws NotFoundException {
@@ -50,7 +65,7 @@ public class UserApiServiceImpl extends UserApiService {
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
-        Boolean success = Database.deleteUser(21);
+        Boolean success = Database.deleteUser(currentUser.getUserId());
 
         if(!success) {
             Error error = new Error();
@@ -60,6 +75,41 @@ public class UserApiServiceImpl extends UserApiService {
         }
 
         return Response.ok(success).build();
+    }
+
+    @Override
+    public Response updateUser(String token, String username, String password, String email, String displayName, SecurityContext securityContext)
+            throws NotFoundException {
+        UserProfile currentUser = Database.verifyToken(token);
+        if(currentUser == null) {
+            Error error = new Error();
+            error.setCode(800);
+            error.setMessage("Invalid token");
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
+        }
+
+        if(email == null)
+            email = currentUser.getEmail();
+
+        if(displayName == null)
+            displayName = currentUser.getDisplayName();
+
+        int ret = Database.updateUser(currentUser.getUserId(), username, password, email, displayName);
+
+        if(ret == 0) {
+            Error error = new Error();
+            error.setCode(204);
+            error.setMessage("Could not update account information");
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
+        }
+        else if(ret == -1) {
+            Error error = new Error();
+            error.setCode(205);
+            error.setMessage("Could not change account name");
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
+        }
+
+        return Response.ok(ret == 1).build();
     }
 
     @Override

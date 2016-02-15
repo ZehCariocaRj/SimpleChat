@@ -133,12 +133,12 @@ namespace SimpleChatClientWPF.ViewModels
             try
             {
                 // Continue with registration process
-                if(LoginManager.RegisterUser(Username, Password, Email))
+                if(AccountManager.RegisterUser(Username, Password, Email))
                 {
                     // Get out of registration screen now that we're registered
                     ViewPresenter.PopView();
 
-                    if (LoginManager.LoginUser(Username, Password))
+                    if (AccountManager.LoginUser(Username, Password))
                     {
                         // If the post-registration login was successful, automatically move to the friend list
                         ViewPresenter.PushView(new Views.FriendListView());

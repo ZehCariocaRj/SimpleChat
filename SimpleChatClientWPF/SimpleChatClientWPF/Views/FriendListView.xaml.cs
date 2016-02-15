@@ -30,7 +30,13 @@ namespace SimpleChatClientWPF.Views
             friendListViewModel.SetListBox(FriendList);
             DataContext = friendListViewModel;
 
+            Loaded += FriendListView_Loaded;
+        }
+
+        private void FriendListView_Loaded(object sender, RoutedEventArgs e)
+        {
             friendListViewModel.UpdateFriendList();
+            friendListViewModel.UpdateProfile();
         }
     }
 }

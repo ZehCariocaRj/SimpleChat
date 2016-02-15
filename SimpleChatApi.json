@@ -21,6 +21,39 @@
   
   "paths": {
     "/user": {
+      "get": {
+        "description": "Get profile of current logged in user.",
+        "operationId": "getMyProfile",
+        "parameters": [
+          {
+            "name": "Token",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user profile response",
+            "schema": {
+                "$ref": "#/definitions/UserProfile"
+            }
+          },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+		}
+	  },
       "post": {
         "description": "Register new account.",
         "operationId": "registerUser",
@@ -30,21 +63,21 @@
             "in": "query",
             "description": "New account's username",
             "required": true,
-				"type": "string"
+			"type": "string"
           }, 
           {
             "name": "password",
             "in": "query",
             "description": "New account's password",
             "required": true,
-				"type": "string"
+			"type": "string"
           }, 
           {
             "name": "email",
             "in": "query",
             "description": "New account's email",
             "required": true,
-				"type": "string"
+			"type": "string"
           }
         ],
         "responses": {
@@ -68,6 +101,67 @@
           }
         }
       }, 
+	  "put": {
+        "description": "Update account and profile information.",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "Token",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Account's username",
+            "required": false,
+			"type": "string"
+          }, 
+          {
+            "name": "password",
+            "in": "query",
+            "description": "Account's password",
+            "required": false,
+			"type": "string"
+          }, 
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Account's email",
+            "required": false,
+			"type": "string"
+          },
+          {
+            "name": "displayName",
+            "in": "query",
+            "description": "Account's display name",
+            "required": false,
+			"type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user delete response",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
       "delete": {
         "description": "Delete account.",
         "operationId": "deleteUser",

@@ -292,6 +292,102 @@ namespace IO.Swagger.Api
         /// 
         /// </summary>
         /// <remarks>
+        /// Get profile of current logged in user.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <returns>UserProfile</returns>
+        UserProfile GetMyProfile (string token);
+  
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Get profile of current logged in user.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <returns>ApiResponse of UserProfile</returns>
+        ApiResponse<UserProfile> GetMyProfileWithHttpInfo (string token);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Get profile of current logged in user.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of UserProfile</returns>
+        System.Threading.Tasks.Task<UserProfile> GetMyProfileAsync (string token);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Get profile of current logged in user.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of ApiResponse (UserProfile)</returns>
+        System.Threading.Tasks.Task<ApiResponse<UserProfile>> GetMyProfileAsyncWithHttpInfo (string token);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Update account and profile information.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <param name="username">Account&#39;s username</param>
+        /// <param name="password">Account&#39;s password</param>
+        /// <param name="email">Account&#39;s email</param>
+        /// <param name="displayName">Account&#39;s display name</param>
+        /// <returns>bool?</returns>
+        bool? UpdateUser (string token, string username = null, string password = null, string email = null, string displayName = null);
+  
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Update account and profile information.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <param name="username">Account&#39;s username</param>
+        /// <param name="password">Account&#39;s password</param>
+        /// <param name="email">Account&#39;s email</param>
+        /// <param name="displayName">Account&#39;s display name</param>
+        /// <returns>ApiResponse of bool?</returns>
+        ApiResponse<bool?> UpdateUserWithHttpInfo (string token, string username = null, string password = null, string email = null, string displayName = null);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Update account and profile information.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <param name="username">Account&#39;s username</param>
+        /// <param name="password">Account&#39;s password</param>
+        /// <param name="email">Account&#39;s email</param>
+        /// <param name="displayName">Account&#39;s display name</param>
+        /// <returns>Task of bool?</returns>
+        System.Threading.Tasks.Task<bool?> UpdateUserAsync (string token, string username = null, string password = null, string email = null, string displayName = null);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Update account and profile information.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <param name="username">Account&#39;s username</param>
+        /// <param name="password">Account&#39;s password</param>
+        /// <param name="email">Account&#39;s email</param>
+        /// <param name="displayName">Account&#39;s display name</param>
+        /// <returns>Task of ApiResponse (bool?)</returns>
+        System.Threading.Tasks.Task<ApiResponse<bool?>> UpdateUserAsyncWithHttpInfo (string token, string username = null, string password = null, string email = null, string displayName = null);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         /// Register new account.
         /// </remarks>
         /// <param name="username">New account&#39;s username</param>
@@ -1589,6 +1685,336 @@ namespace IO.Swagger.Api
                 throw new ApiException (statusCode, "Error calling DeleteFriend: " + response.Content, response.Content);
             else if (statusCode == 0)
                 throw new ApiException (statusCode, "Error calling DeleteFriend: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<bool?>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (bool?) Configuration.ApiClient.Deserialize(response, typeof(bool?)));
+            
+        }
+        
+        /// <summary>
+        ///  Get profile of current logged in user.
+        /// </summary>
+        /// <param name="token">Authentication token</param> 
+        /// <returns>UserProfile</returns>
+        public UserProfile GetMyProfile (string token)
+        {
+             ApiResponse<UserProfile> response = GetMyProfileWithHttpInfo(token);
+             return response.Data;
+        }
+
+        /// <summary>
+        ///  Get profile of current logged in user.
+        /// </summary>
+        /// <param name="token">Authentication token</param> 
+        /// <returns>ApiResponse of UserProfile</returns>
+        public ApiResponse< UserProfile > GetMyProfileWithHttpInfo (string token)
+        {
+            
+            // verify the required parameter 'token' is set
+            if (token == null)
+                throw new ApiException(400, "Missing required parameter 'token' when calling DefaultApi->GetMyProfile");
+            
+    
+            var path_ = "/user";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            Object postBody = null;
+
+            // to determine the Content-Type header
+            String[] httpContentTypes = new String[] {
+                "application/json"
+            };
+            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+
+            // to determine the Accept header
+            String[] httpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
+            if (httpHeaderAccept != null)
+                headerParams.Add("Accept", httpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            if (token != null) headerParams.Add("Token", Configuration.ApiClient.ParameterToString(token)); // header parameter
+            
+            
+            
+
+            
+    
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, 
+                Method.GET, queryParams, postBody, headerParams, formParams, fileParams,
+                pathParams, httpContentType);
+
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling GetMyProfile: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling GetMyProfile: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<UserProfile>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (UserProfile) Configuration.ApiClient.Deserialize(response, typeof(UserProfile)));
+            
+        }
+    
+        /// <summary>
+        ///  Get profile of current logged in user.
+        /// </summary>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of UserProfile</returns>
+        public async System.Threading.Tasks.Task<UserProfile> GetMyProfileAsync (string token)
+        {
+             ApiResponse<UserProfile> response = await GetMyProfileAsyncWithHttpInfo(token);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        ///  Get profile of current logged in user.
+        /// </summary>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of ApiResponse (UserProfile)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<UserProfile>> GetMyProfileAsyncWithHttpInfo (string token)
+        {
+            // verify the required parameter 'token' is set
+            if (token == null) throw new ApiException(400, "Missing required parameter 'token' when calling GetMyProfile");
+            
+    
+            var path_ = "/user";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            Object postBody = null;
+
+            // to determine the Content-Type header
+            String[] httpContentTypes = new String[] {
+                "application/json"
+            };
+            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+
+            // to determine the Accept header
+            String[] httpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
+            if (httpHeaderAccept != null)
+                headerParams.Add("Accept", httpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            if (token != null) headerParams.Add("Token", Configuration.ApiClient.ParameterToString(token)); // header parameter
+            
+            
+            
+
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, 
+                Method.GET, queryParams, postBody, headerParams, formParams, fileParams, 
+                pathParams, httpContentType);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling GetMyProfile: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling GetMyProfile: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<UserProfile>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (UserProfile) Configuration.ApiClient.Deserialize(response, typeof(UserProfile)));
+            
+        }
+        
+        /// <summary>
+        ///  Update account and profile information.
+        /// </summary>
+        /// <param name="token">Authentication token</param> 
+        /// <param name="username">Account&#39;s username</param> 
+        /// <param name="password">Account&#39;s password</param> 
+        /// <param name="email">Account&#39;s email</param> 
+        /// <param name="displayName">Account&#39;s display name</param> 
+        /// <returns>bool?</returns>
+        public bool? UpdateUser (string token, string username = null, string password = null, string email = null, string displayName = null)
+        {
+             ApiResponse<bool?> response = UpdateUserWithHttpInfo(token, username, password, email, displayName);
+             return response.Data;
+        }
+
+        /// <summary>
+        ///  Update account and profile information.
+        /// </summary>
+        /// <param name="token">Authentication token</param> 
+        /// <param name="username">Account&#39;s username</param> 
+        /// <param name="password">Account&#39;s password</param> 
+        /// <param name="email">Account&#39;s email</param> 
+        /// <param name="displayName">Account&#39;s display name</param> 
+        /// <returns>ApiResponse of bool?</returns>
+        public ApiResponse< bool? > UpdateUserWithHttpInfo (string token, string username = null, string password = null, string email = null, string displayName = null)
+        {
+            
+            // verify the required parameter 'token' is set
+            if (token == null)
+                throw new ApiException(400, "Missing required parameter 'token' when calling DefaultApi->UpdateUser");
+            
+    
+            var path_ = "/user";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            Object postBody = null;
+
+            // to determine the Content-Type header
+            String[] httpContentTypes = new String[] {
+                "application/json"
+            };
+            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+
+            // to determine the Accept header
+            String[] httpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
+            if (httpHeaderAccept != null)
+                headerParams.Add("Accept", httpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            if (username != null) queryParams.Add("username", Configuration.ApiClient.ParameterToString(username)); // query parameter
+            if (password != null) queryParams.Add("password", Configuration.ApiClient.ParameterToString(password)); // query parameter
+            if (email != null) queryParams.Add("email", Configuration.ApiClient.ParameterToString(email)); // query parameter
+            if (displayName != null) queryParams.Add("displayName", Configuration.ApiClient.ParameterToString(displayName)); // query parameter
+            
+            if (token != null) headerParams.Add("Token", Configuration.ApiClient.ParameterToString(token)); // header parameter
+            
+            
+            
+
+            
+    
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, 
+                Method.PUT, queryParams, postBody, headerParams, formParams, fileParams,
+                pathParams, httpContentType);
+
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UpdateUser: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UpdateUser: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<bool?>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (bool?) Configuration.ApiClient.Deserialize(response, typeof(bool?)));
+            
+        }
+    
+        /// <summary>
+        ///  Update account and profile information.
+        /// </summary>
+        /// <param name="token">Authentication token</param>
+        /// <param name="username">Account&#39;s username</param>
+        /// <param name="password">Account&#39;s password</param>
+        /// <param name="email">Account&#39;s email</param>
+        /// <param name="displayName">Account&#39;s display name</param>
+        /// <returns>Task of bool?</returns>
+        public async System.Threading.Tasks.Task<bool?> UpdateUserAsync (string token, string username = null, string password = null, string email = null, string displayName = null)
+        {
+             ApiResponse<bool?> response = await UpdateUserAsyncWithHttpInfo(token, username, password, email, displayName);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        ///  Update account and profile information.
+        /// </summary>
+        /// <param name="token">Authentication token</param>
+        /// <param name="username">Account&#39;s username</param>
+        /// <param name="password">Account&#39;s password</param>
+        /// <param name="email">Account&#39;s email</param>
+        /// <param name="displayName">Account&#39;s display name</param>
+        /// <returns>Task of ApiResponse (bool?)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<bool?>> UpdateUserAsyncWithHttpInfo (string token, string username = null, string password = null, string email = null, string displayName = null)
+        {
+            // verify the required parameter 'token' is set
+            if (token == null) throw new ApiException(400, "Missing required parameter 'token' when calling UpdateUser");
+            
+    
+            var path_ = "/user";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            Object postBody = null;
+
+            // to determine the Content-Type header
+            String[] httpContentTypes = new String[] {
+                "application/json"
+            };
+            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+
+            // to determine the Accept header
+            String[] httpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
+            if (httpHeaderAccept != null)
+                headerParams.Add("Accept", httpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            if (username != null) queryParams.Add("username", Configuration.ApiClient.ParameterToString(username)); // query parameter
+            if (password != null) queryParams.Add("password", Configuration.ApiClient.ParameterToString(password)); // query parameter
+            if (email != null) queryParams.Add("email", Configuration.ApiClient.ParameterToString(email)); // query parameter
+            if (displayName != null) queryParams.Add("displayName", Configuration.ApiClient.ParameterToString(displayName)); // query parameter
+            
+            if (token != null) headerParams.Add("Token", Configuration.ApiClient.ParameterToString(token)); // header parameter
+            
+            
+            
+
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, 
+                Method.PUT, queryParams, postBody, headerParams, formParams, fileParams, 
+                pathParams, httpContentType);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UpdateUser: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UpdateUser: " + response.ErrorMessage, response.ErrorMessage);
 
             return new ApiResponse<bool?>(statusCode,
                 response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),

@@ -29,15 +29,15 @@ namespace SimpleChatClientWPF
         public bool AutomaticSignIn;
 
         [XmlElement("RemmeberPassword")]
-        public bool RemmeberPassword;
+        public bool RememberPassword;
     }
 
-    class LoginManager
+    class AccountManager
     {
         private AccountInfo _accountInfo;
 
         static string accountXmlFilename = "account.xml";
-        private LoginManager()
+        private AccountManager()
         {
             _accountInfo = new AccountInfo();
 
@@ -52,7 +52,7 @@ namespace SimpleChatClientWPF
             }
         }
 
-        ~LoginManager()
+        ~AccountManager()
         {
             if(!RememberPassword)
             {
@@ -66,15 +66,28 @@ namespace SimpleChatClientWPF
             }
         }
 
-        private static LoginManager _loginManager = null;
-        public static LoginManager GetInstance()
+        private static AccountManager _loginManager = null;
+        public static AccountManager GetInstance()
         {
             if(_loginManager == null)
             {
-                _loginManager = new LoginManager();
+                _loginManager = new AccountManager();
             }
 
             return _loginManager;
+        }
+
+        private int _userId;
+        public int UserId
+        {
+            get
+            {
+                return _userId;
+            }
+            set
+            {
+                _userId = value;
+            }
         }
 
         public String Username
@@ -129,22 +142,73 @@ namespace SimpleChatClientWPF
         {
             get
             {
-                return _accountInfo.RemmeberPassword;
+                return _accountInfo.RememberPassword;
             }
             set
             {
-                _accountInfo.RemmeberPassword = value;
+                _accountInfo.RememberPassword = value;
             }
+        }
+
+        private string _displayName;
+        public string DisplayName
+        {
+            get
+            {
+                return _displayName;
+            }
+            set
+            {
+                _displayName = value;
+            }
+        }
+
+        private string _email;
+        public string Email
+        {
+            get
+            {
+                return _email;
+            }
+            set
+            {
+                _email = value;
+            }
+        }
+
+        public static IO.Swagger.Model.UserProfile UpdateProfile()
+        {
+            AccountManager lm = AccountManager.GetInstance();
+            DefaultApi api = new DefaultApi("http://localhost:8080/api/");
+
+            IO.Swagger.Model.UserProfile profile = new IO.Swagger.Model.UserProfile();
+            profile = api.GetMyProfile(lm.Token);
+            lm.UserId = profile.UserId.Value;
+            lm.Username = profile.Username;
+            lm.DisplayName = profile.DisplayName;
+            lm.Email = profile.Email;
+
+            return profile;
+        }
+
+        public static bool UpdateUser(string token, string username, string password, string email, string displayName)
+        {
+            DefaultApi api = new DefaultApi("http://localhost:8080/api/");
+            AccountManager lm = AccountManager.GetInstance();
+            var ret = api.UpdateUser(lm.Token, username, password, email, displayName).Value;
+            UpdateProfile();
+            return ret;
         }
 
         public static bool LoginUser(string username, string password)
         {
             DefaultApi api = new DefaultApi("http://localhost:8080/api/");
 
-            LoginManager lm = LoginManager.GetInstance();
+            AccountManager lm = AccountManager.GetInstance();
             lm.Token = api.LoginUser(username, password);
-            lm.Username = username;
             lm.Password = password;
+
+            UpdateProfile();
 
             return true;
         }
@@ -162,7 +226,7 @@ namespace SimpleChatClientWPF
 
             try
             {
-                LoginManager lm = LoginManager.GetInstance();
+                AccountManager lm = AccountManager.GetInstance();
                 DefaultApi api = new DefaultApi("http://localhost:8080/api/");
                 friends = api.GetMyFriends(lm.Token);
             }
@@ -178,7 +242,7 @@ namespace SimpleChatClientWPF
         {
             try
             {
-                LoginManager lm = LoginManager.GetInstance();
+                AccountManager lm = AccountManager.GetInstance();
                 DefaultApi api = new DefaultApi("http://localhost:8080/api/");
                 return api.AddFriend(username, lm.Token);
             }
@@ -193,7 +257,7 @@ namespace SimpleChatClientWPF
         {
             try
             {
-                LoginManager lm = LoginManager.GetInstance();
+                AccountManager lm = AccountManager.GetInstance();
                 DefaultApi api = new DefaultApi("http://localhost:8080/api/");
                 return api.DeleteFriend(id, lm.Token).Value;
             }
