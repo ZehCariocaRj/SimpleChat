@@ -33,7 +33,7 @@ public class FriendsApiServiceImpl extends FriendsApiService {
             Error error = new Error();
             error.setCode(800);
             error.setMessage("Invalid token");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         ArrayList<Friend> friends = Database.getMyFriends(currentUser.getUserId());
@@ -48,10 +48,17 @@ public class FriendsApiServiceImpl extends FriendsApiService {
             Error error = new Error();
             error.setCode(800);
             error.setMessage("Invalid token");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         Boolean status = Database.addFriend(currentUser.getUserId(), targetId, RelationshipStatus.Friend);
+        if(status == false) {
+            Error error = new Error();
+            error.setCode(400);
+            error.setMessage("Could not add friend");
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
+        }
+
         return Response.ok(status).build();
     }
     
@@ -63,10 +70,17 @@ public class FriendsApiServiceImpl extends FriendsApiService {
             Error error = new Error();
             error.setCode(800);
             error.setMessage("Invalid token");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         Boolean status = Database.deleteFriend(currentUser.getUserId(), targetId);
+        if(status == false) {
+            Error error = new Error();
+            error.setCode(401);
+            error.setMessage("Could not delete friend");
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
+        }
+
         return Response.ok(status).build();
     }
     

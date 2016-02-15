@@ -120,7 +120,7 @@ public class Database {
             return result;
 
         try {
-            int enabled = 0;
+            int enabled = 1;
 
             // TODO: Replace with something more secure
             password = getHashedString(password);
@@ -349,7 +349,7 @@ public class Database {
             PreparedStatement statement = null;
             statement = conn.prepareStatement("SELECT COUNT(*) FROM users WHERE username = ? AND password = ? AND enabled = 1");
             statement.setString(1, username);
-            statement.setString(2, password);
+            statement.setString(2, passwordHash);
 
             ResultSet results = statement.executeQuery();
             results.next();
@@ -477,7 +477,12 @@ public class Database {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
             messageDigest.update(password.getBytes());
-            output = new String(messageDigest.digest());
+
+            output = "";
+            byte digest[] = messageDigest.digest();
+            for (int i = 0; i < digest.length; i++) {
+                output += String.format("%02x", digest[i]);
+            }
         } catch (NoSuchAlgorithmException e) {
 
         }

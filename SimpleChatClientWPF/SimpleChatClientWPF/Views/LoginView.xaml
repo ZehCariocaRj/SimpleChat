@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="SimpleChatClientWPF.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimpleChatClientWPF.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="340" d:DesignWidth="200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+             Padding="4,10,4,10"
+             Width="200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Image Height="80" Source="/SimpleChatClientWPF;component/banner.png" Grid.ColumnSpan="2" Grid.RowSpan="1"/>
+        
+        <TextBlock Margin="10,0,10,0" TextWrapping="Wrap" Text="{Binding ErrorMessage}" Grid.ColumnSpan="2" Foreground="Red" Name="ErrorMessageBlock" Grid.Row="1"/>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+            <Label Content="Username" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox TextWrapping="Wrap" Text="{Binding Username}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2">
+            <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <PasswordBox Name="Password" PasswordChanged="Password_PasswordChanged"/>
+        </StackPanel>
+
+        
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="2">
+            <TextBlock></TextBlock>
+            <CheckBox Content=" Automatically sign in" Padding="0,0,0,8" IsChecked="{Binding AutomaticSignIn}"/>
+            <CheckBox Content=" Remember password" Padding="0,0,0,8" IsChecked="{Binding RemmeberPassword}"/>
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2">
+            <Button Content="Login" Name="LoginButton" Command="{Binding PerformLoginCommand}" Padding="0,4,0,4"/>
+            <Button Content="Regster" Command="{Binding ChangeRegisterViewCommand}" Padding="0,4,0,4"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

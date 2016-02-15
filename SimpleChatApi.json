@@ -54,6 +54,12 @@
               "type": "string"
             }
           },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
           "default": {
             "description": "unexpected error",
             "schema": {
@@ -79,6 +85,12 @@
             "description": "user delete response",
             "schema": {
               "type": "boolean"
+            }
+          },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           },
           "default": {
@@ -120,6 +132,12 @@
 			  }
             }
           },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
           "default": {
             "description": "unexpected error",
             "schema": {
@@ -147,6 +165,12 @@
             "description": "verification response",
             "schema": {
               "type": "boolean"
+            }
+          },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           },
           "default": {
@@ -185,6 +209,12 @@
               "type": "string"
             }
           },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
           "default": {
             "description": "unexpected error",
             "schema": {
@@ -221,6 +251,12 @@
               }
             }
           },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
           "default": {
             "description": "unexpected error",
             "schema": {
@@ -255,6 +291,12 @@
               "$ref": "#/definitions/Friend"
             }
           },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
           "default": {
             "description": "unexpected error",
             "schema": {
@@ -287,6 +329,12 @@
             "description": "friend response",
             "schema": {
               "type": "boolean"
+            }
+          },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           },
           "default": {
@@ -336,6 +384,12 @@
               "type": "integer"
             }
           },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
           "default": {
             "description": "unexpected error",
             "schema": {
@@ -378,6 +432,12 @@
             "description": "chat response",
             "schema": {
               "$ref": "#/definitions/Message"
+            }
+          },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           },
           "default": {
@@ -424,6 +484,12 @@
 			  "items": {
                 "$ref": "#/definitions/Message"
 			  }
+            }
+          },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           },
           "default": {

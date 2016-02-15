@@ -31,7 +31,7 @@ public class ChatApiServiceImpl extends ChatApiService {
             Error error = new Error();
             error.setCode(800);
             error.setMessage("Invalid token");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         Message sentMessage = Database.sendChatMessage(targetId, currentUser.getUserId(), message);
@@ -40,7 +40,7 @@ public class ChatApiServiceImpl extends ChatApiService {
             Error error = new Error();
             error.setCode(601);
             error.setMessage("Could not send message to group");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         return Response.ok(sentMessage).build();
@@ -54,7 +54,7 @@ public class ChatApiServiceImpl extends ChatApiService {
             Error error = new Error();
             error.setCode(800);
             error.setMessage("Invalid token");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         userIds.add(currentUser.getUserId()); // Add self to group if needed
@@ -65,7 +65,7 @@ public class ChatApiServiceImpl extends ChatApiService {
             Error error = new Error();
             error.setCode(600);
             error.setMessage("Could not create chat group");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
@@ -79,7 +79,7 @@ public class ChatApiServiceImpl extends ChatApiService {
             Error error = new Error();
             error.setCode(800);
             error.setMessage("Invalid token");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         List<Message> messages = null;
@@ -93,7 +93,7 @@ public class ChatApiServiceImpl extends ChatApiService {
             Error error = new Error();
             error.setCode(603);
             error.setMessage("Could not get messages");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         return Response.ok(messages).build();

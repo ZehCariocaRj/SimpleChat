@@ -32,13 +32,13 @@ public class UserApiServiceImpl extends UserApiService {
             Error error = new Error();
             error.setCode(100);
             error.setMessage("Username already exists");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         Boolean success = Database.registerUser(username, password, email);
         return Response.ok(success).build();
     }
-    
+
     @Override
     public Response deleteUser(String token, SecurityContext securityContext)
     throws NotFoundException {
@@ -47,7 +47,7 @@ public class UserApiServiceImpl extends UserApiService {
             Error error = new Error();
             error.setCode(800);
             error.setMessage("Invalid token");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         Boolean success = Database.deleteUser(21);
@@ -56,12 +56,12 @@ public class UserApiServiceImpl extends UserApiService {
             Error error = new Error();
             error.setCode(203);
             error.setMessage("Could not delete account");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         return Response.ok(success).build();
     }
-    
+
     @Override
     public Response loginUser(String username, String password, SecurityContext securityContext)
     throws NotFoundException {
@@ -70,12 +70,12 @@ public class UserApiServiceImpl extends UserApiService {
             Error error = new Error();
             error.setCode(200);
             error.setMessage("Invalid username/password combination");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         return Response.ok(token).build();
     }
-    
+
     @Override
     public Response verifyUser(String verificationHash, SecurityContext securityContext)
     throws NotFoundException {
@@ -84,12 +84,12 @@ public class UserApiServiceImpl extends UserApiService {
             Error error = new Error();
             error.setCode(201);
             error.setMessage("Could not verify account");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         return Response.ok(verified).build();
     }
-    
+
     @Override
     public Response getProfileById(Integer targetUserId, String token, SecurityContext securityContext)
     throws NotFoundException {
@@ -98,7 +98,7 @@ public class UserApiServiceImpl extends UserApiService {
             Error error = new Error();
             error.setCode(800);
             error.setMessage("Invalid token");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         UserProfile profile = Database.getProfileById(targetUserId);
@@ -106,7 +106,7 @@ public class UserApiServiceImpl extends UserApiService {
             Error error = new Error();
             error.setCode(202);
             error.setMessage("Invalid account");
-            return Response.status(403).entity(error).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
         return Response.ok(profile).build();
