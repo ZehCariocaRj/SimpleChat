@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
              Padding="4,10,4,10"
-             Width="200">
+             Width="200"
+             FocusManager.FocusedElement="{Binding ElementName=DisplayNameInput}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100*"/>
@@ -32,7 +33,7 @@
 
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
             <Label Content="Display Name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding DisplayName}"/>
+            <TextBox Name="DisplayNameInput" TextWrapping="Wrap" Text="{Binding DisplayName}"/>
         </StackPanel>
         
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2">
