@@ -15,14 +15,14 @@ using IO.Swagger.Client;
 
 namespace SimpleChatClientWPF.ViewModels
 {
-    class FriendListViewModel : INotifyPropertyChanged
+    class ChatListViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private Models.FriendListModel friendList;
+        private Models.ChatListModel chatList;
 
-        public FriendListViewModel()
+        public ChatListViewModel()
         {
-            friendList = new Models.FriendListModel();
+            chatList = new Models.ChatListModel();
         }
 
         internal void UpdateProfile()
@@ -57,73 +57,62 @@ namespace SimpleChatClientWPF.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs("MyDisplayName"));
             }
         }
-
-        public ICommand DeleteFriendCommand
+        
+        public ICommand CreateChatCommand
         {
             get
             {
-                return new DelegateCommand(DeleteFriend);
+                return new DelegateCommand(CreateChat);
             }
         }
 
-        private void DeleteFriend()
+        private void CreateChat()
         {
-            if (_friendList != null && _friendList.SelectedItem != null)
+            if (_chatList != null)
             {
-                Views.FriendListEntry friend = (Views.FriendListEntry)_friendList.SelectedItem;
-                AccountManager.DeleteFriend(friend.UserId);
+                var createChatDialog = new Views.CreateChatDialog();
+                var res = createChatDialog.ShowDialog();
 
-                UpdateFriendList();
+                UpdateChatList();
             }
         }
 
-        public ICommand AddFriendCommand
+        ListBox _chatList;
+        public void SetListBox(ListBox chatList)
         {
-            get
-            {
-                return new DelegateCommand(AddFriend);
-            }
+            _chatList = chatList;
         }
 
-        private void AddFriend()
+        internal void UpdateChatList()
         {
-            if (_friendList != null)
+            if (_chatList != null)
             {
-                var addFriendDialog = new Views.AddFriendDialog();
-                var res = addFriendDialog.ShowDialog();
+                _chatList.Items.Clear();
 
-                UpdateFriendList();
-            }
-        }
-
-        ListBox _friendList;
-        public void SetListBox(ListBox friendList)
-        {
-            _friendList = friendList;
-        }
-
-        internal void UpdateFriendList()
-        {
-            if (_friendList != null)
-            {
-                _friendList.Items.Clear();
-
-                var friends = AccountManager.GetFriendList();
-                for (int i = 0; i < friends.Count; i++)
+                var chats = AccountManager.GetChatList();
+                for (int i = 0; i < chats.Count; i++)
                 {
-                    var friend = new Views.FriendListEntry(friends[i].Id.Value, friends[i].DisplayName, friends[i].Username);
-                    friend.MouseDoubleClick += Friend_MouseDoubleClick;
-                    _friendList.Items.Add(friend);
+                    var chat = new Views.ChatListEntry(chats[i].Id.Value, chats[i].ChatTitle, "");
+                    chat.MouseDoubleClick += Chat_MouseDoubleClick;
+                    _chatList.Items.Add(chat);
                 }
             }
         }
 
-        private void Friend_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        public void OpenChat(int chatId)
         {
-            Views.FriendListEntry entry = (Views.FriendListEntry)sender;
-            //OpenChat(entry.UserId);
+            Views.ChatView chatView = new Views.ChatView(chatId);
+            chatView.Show();
+            
+            UpdateChatList();
         }
-        
+
+        private void Chat_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Views.ChatListEntry entry = (Views.ChatListEntry)sender;
+            OpenChat(entry.ChatId);
+        }
+
         public ICommand OptionsViewCommand
         {
             get

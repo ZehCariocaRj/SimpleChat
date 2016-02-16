@@ -7,6 +7,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Xml;
 using System.Xml.Serialization;
 using IO.Swagger.Api;
@@ -191,6 +192,20 @@ namespace SimpleChatClientWPF
             return profile;
         }
 
+        internal static bool SetChatTitle(int chatId, string chatTitle)
+        {
+            DefaultApi api = new DefaultApi("http://localhost:8080/api/");
+            AccountManager lm = AccountManager.GetInstance();
+            return api.UpdateChat(lm.Token, chatId, chatTitle).Value;
+        }
+
+        internal static void Signout()
+        {
+            AccountManager lm = AccountManager.GetInstance();
+            lm.Token = "";
+            lm.AutomaticSignIn = false;
+        }
+
         public static bool UpdateUser(string token, string username, string password, string email, string displayName)
         {
             DefaultApi api = new DefaultApi("http://localhost:8080/api/");
@@ -213,10 +228,10 @@ namespace SimpleChatClientWPF
             return true;
         }
 
-        public static bool RegisterUser(string username, string password, string email)
+        public static bool RegisterUser(string username, string password, string email, string displayName)
         {
             DefaultApi api = new DefaultApi("http://localhost:8080/api/");
-            var result = api.RegisterUserWithHttpInfo(username, password, email);
+            var result = api.RegisterUserWithHttpInfo(displayName, username, password, email);
             return result.Data == "true";
         }
 
@@ -258,6 +273,55 @@ namespace SimpleChatClientWPF
             }
 
             return false;
+        }
+
+        public static int CreateChatGroup(string chatName)
+        {
+            AccountManager lm = AccountManager.GetInstance();
+            DefaultApi api = new DefaultApi("http://localhost:8080/api/");
+            return api.CreateChatGroup(new List<int?>() { lm.UserId }, chatName, lm.Token).Value;
+        }
+
+        public static IO.Swagger.Model.UserProfile GetProfileById(int userId)
+        {
+            AccountManager lm = AccountManager.GetInstance();
+            DefaultApi api = new DefaultApi("http://localhost:8080/api/");
+            return api.GetProfileById(userId, lm.Token);
+        }
+
+        public static List<IO.Swagger.Model.Chat> GetChatList()
+        {
+            AccountManager lm = AccountManager.GetInstance();
+            DefaultApi api = new DefaultApi("http://localhost:8080/api/");
+            return api.GetChats(lm.Token);
+        }
+
+        public static IO.Swagger.Model.Chat GetChatInfo(int chatId)
+        {
+            AccountManager lm = AccountManager.GetInstance();
+            DefaultApi api = new DefaultApi("http://localhost:8080/api/");
+            return api.GetChat(chatId, lm.Token);
+        }
+
+        public static List<IO.Swagger.Model.Message> GetChatMessages(int chatId)
+        {
+            AccountManager lm = AccountManager.GetInstance();
+            DefaultApi api = new DefaultApi("http://localhost:8080/api/");
+            return api.GetChatMessages(chatId, lm.Token);
+        }
+
+        public static IO.Swagger.Model.Message SendChatMessage(int chatId, string message)
+        {
+            AccountManager lm = AccountManager.GetInstance();
+            DefaultApi api = new DefaultApi("http://localhost:8080/api/");
+            return api.SendChatMessage(chatId, message, lm.Token);
+        }
+
+        public static bool InviteUserToChat(int chatId, string username)
+        {
+            AccountManager lm = AccountManager.GetInstance();
+            DefaultApi api = new DefaultApi("http://localhost:8080/api/");
+            return api.InviteUserToChat(chatId, username, lm.Token).Value;
         }
     }
 }

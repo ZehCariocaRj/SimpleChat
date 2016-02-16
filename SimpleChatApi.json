@@ -59,6 +59,13 @@
         "operationId": "registerUser",
         "parameters": [
           {
+            "name": "displayName",
+            "in": "query",
+            "description": "New account's display name",
+            "required": true,
+			"type": "string"
+          }, 
+          {
             "name": "username",
             "in": "query",
             "description": "New account's username",
@@ -220,10 +227,7 @@
           "200": {
             "description": "user profile response",
             "schema": {
-			  "type": "array",
-			  "items": {
-                "$ref": "#/definitions/UserProfile"
-			  }
+              "$ref": "#/definitions/UserProfile"
             }
           },
           "304": {
@@ -491,10 +495,145 @@
             }
           }
         }
+      },
+	  "put": {
+        "description": "Update chat info.",
+        "operationId": "updateChat",
+        "parameters": [
+          {
+            "name": "Token",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chatId",
+            "in": "query",
+            "description": "Chat group's ID",
+            "required": true,
+			"type": "integer"
+          }, 
+          {
+            "name": "chatTitle",
+            "in": "query",
+            "description": "Chat group's new title",
+            "required": true,
+			"type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "chat update response",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
       }
     },
-	
+    "/chat/invite": {
+      "post": {
+        "description": "Invite user to chat group.",
+        "operationId": "inviteUserToChat",
+        "parameters": [
+          {
+            "name": "chatId",
+            "in": "query",
+            "description": "ID of group chat",
+            "required": true,
+			"type": "integer"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Username of user to be added to chat group",
+            "required": true,
+			"type": "string"
+          },
+          {
+            "name": "Token",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "invite to chat group response",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/chat": {
+      "get": {
+        "description": "Get specific chat.",
+        "operationId": "getChat",
+        "parameters": [
+          {
+            "name": "targetId",
+            "in": "query",
+            "description": "ID of target group",
+            "required": true,
+			"type": "integer"
+          },
+          {
+            "name": "Token",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "chat list response",
+            "schema": {
+			  "$ref": "#/definitions/Chat"
+			}
+          },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
       "post": {
         "description": "Send a chat message.",
         "operationId": "sendChatMessage",
@@ -543,6 +682,44 @@
         }
       }
     },
+    "/chat/all": {
+      "get": {
+        "description": "Get all chats.",
+        "operationId": "getChats",
+        "parameters": [
+          {
+            "name": "Token",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "chat list response",
+            "schema": {
+			  "type": "array",
+			  "items": {
+                "$ref": "#/definitions/Chat"
+			  }
+			}
+          },
+          "304": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/chat/{targetGroupId}": {
       "get": {
         "description": "Get all chat messages from target group chat.",
@@ -559,7 +736,7 @@
             "name": "lastMessageId",
             "in": "query",
             "description": "ID of last message received",
-            "required": true,
+            "required": false,
             "type": "integer"
           },
           {

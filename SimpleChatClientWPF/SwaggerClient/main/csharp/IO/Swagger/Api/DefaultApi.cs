@@ -20,6 +20,50 @@ namespace IO.Swagger.Api
         /// 
         /// </summary>
         /// <remarks>
+        /// Get specific chat.
+        /// </remarks>
+        /// <param name="targetId">ID of target group</param>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Chat</returns>
+        Chat GetChat (int? targetId, string token);
+  
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Get specific chat.
+        /// </remarks>
+        /// <param name="targetId">ID of target group</param>
+        /// <param name="token">Authentication token</param>
+        /// <returns>ApiResponse of Chat</returns>
+        ApiResponse<Chat> GetChatWithHttpInfo (int? targetId, string token);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Get specific chat.
+        /// </remarks>
+        /// <param name="targetId">ID of target group</param>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of Chat</returns>
+        System.Threading.Tasks.Task<Chat> GetChatAsync (int? targetId, string token);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Get specific chat.
+        /// </remarks>
+        /// <param name="targetId">ID of target group</param>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of ApiResponse (Chat)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Chat>> GetChatAsyncWithHttpInfo (int? targetId, string token);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         /// Send a chat message.
         /// </remarks>
         /// <param name="targetId">ID of target group</param>
@@ -63,6 +107,142 @@ namespace IO.Swagger.Api
         /// <param name="token">Authentication token</param>
         /// <returns>Task of ApiResponse (Message)</returns>
         System.Threading.Tasks.Task<ApiResponse<Message>> SendChatMessageAsyncWithHttpInfo (int? targetId, string message, string token);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Get all chats.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <returns>List&lt;Chat&gt;</returns>
+        List<Chat> GetChats (string token);
+  
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Get all chats.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <returns>ApiResponse of List&lt;Chat&gt;</returns>
+        ApiResponse<List<Chat>> GetChatsWithHttpInfo (string token);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Get all chats.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of List&lt;Chat&gt;</returns>
+        System.Threading.Tasks.Task<List<Chat>> GetChatsAsync (string token);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Get all chats.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of ApiResponse (List&lt;Chat&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<Chat>>> GetChatsAsyncWithHttpInfo (string token);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Invite user to chat group.
+        /// </remarks>
+        /// <param name="chatId">ID of group chat</param>
+        /// <param name="username">Username of user to be added to chat group</param>
+        /// <param name="token">Authentication token</param>
+        /// <returns>bool?</returns>
+        bool? InviteUserToChat (int? chatId, string username, string token);
+  
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Invite user to chat group.
+        /// </remarks>
+        /// <param name="chatId">ID of group chat</param>
+        /// <param name="username">Username of user to be added to chat group</param>
+        /// <param name="token">Authentication token</param>
+        /// <returns>ApiResponse of bool?</returns>
+        ApiResponse<bool?> InviteUserToChatWithHttpInfo (int? chatId, string username, string token);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Invite user to chat group.
+        /// </remarks>
+        /// <param name="chatId">ID of group chat</param>
+        /// <param name="username">Username of user to be added to chat group</param>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of bool?</returns>
+        System.Threading.Tasks.Task<bool?> InviteUserToChatAsync (int? chatId, string username, string token);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Invite user to chat group.
+        /// </remarks>
+        /// <param name="chatId">ID of group chat</param>
+        /// <param name="username">Username of user to be added to chat group</param>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of ApiResponse (bool?)</returns>
+        System.Threading.Tasks.Task<ApiResponse<bool?>> InviteUserToChatAsyncWithHttpInfo (int? chatId, string username, string token);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Update chat info.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <param name="chatId">Chat group&#39;s ID</param>
+        /// <param name="chatTitle">Chat group&#39;s new title</param>
+        /// <returns>bool?</returns>
+        bool? UpdateChat (string token, int? chatId, string chatTitle);
+  
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Update chat info.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <param name="chatId">Chat group&#39;s ID</param>
+        /// <param name="chatTitle">Chat group&#39;s new title</param>
+        /// <returns>ApiResponse of bool?</returns>
+        ApiResponse<bool?> UpdateChatWithHttpInfo (string token, int? chatId, string chatTitle);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Update chat info.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <param name="chatId">Chat group&#39;s ID</param>
+        /// <param name="chatTitle">Chat group&#39;s new title</param>
+        /// <returns>Task of bool?</returns>
+        System.Threading.Tasks.Task<bool?> UpdateChatAsync (string token, int? chatId, string chatTitle);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Update chat info.
+        /// </remarks>
+        /// <param name="token">Authentication token</param>
+        /// <param name="chatId">Chat group&#39;s ID</param>
+        /// <param name="chatTitle">Chat group&#39;s new title</param>
+        /// <returns>Task of ApiResponse (bool?)</returns>
+        System.Threading.Tasks.Task<ApiResponse<bool?>> UpdateChatAsyncWithHttpInfo (string token, int? chatId, string chatTitle);
         
         /// <summary>
         /// 
@@ -119,10 +299,10 @@ namespace IO.Swagger.Api
         /// Get all chat messages from target group chat.
         /// </remarks>
         /// <param name="targetGroupId">ID of target group</param>
-        /// <param name="lastMessageId">ID of last message received</param>
         /// <param name="token">Authentication token</param>
+        /// <param name="lastMessageId">ID of last message received</param>
         /// <returns>List&lt;Message&gt;</returns>
-        List<Message> GetChatMessages (int? targetGroupId, int? lastMessageId, string token);
+        List<Message> GetChatMessages (int? targetGroupId, string token, int? lastMessageId = null);
   
         /// <summary>
         /// 
@@ -131,10 +311,10 @@ namespace IO.Swagger.Api
         /// Get all chat messages from target group chat.
         /// </remarks>
         /// <param name="targetGroupId">ID of target group</param>
-        /// <param name="lastMessageId">ID of last message received</param>
         /// <param name="token">Authentication token</param>
+        /// <param name="lastMessageId">ID of last message received</param>
         /// <returns>ApiResponse of List&lt;Message&gt;</returns>
-        ApiResponse<List<Message>> GetChatMessagesWithHttpInfo (int? targetGroupId, int? lastMessageId, string token);
+        ApiResponse<List<Message>> GetChatMessagesWithHttpInfo (int? targetGroupId, string token, int? lastMessageId = null);
 
         /// <summary>
         /// 
@@ -143,10 +323,10 @@ namespace IO.Swagger.Api
         /// Get all chat messages from target group chat.
         /// </remarks>
         /// <param name="targetGroupId">ID of target group</param>
-        /// <param name="lastMessageId">ID of last message received</param>
         /// <param name="token">Authentication token</param>
+        /// <param name="lastMessageId">ID of last message received</param>
         /// <returns>Task of List&lt;Message&gt;</returns>
-        System.Threading.Tasks.Task<List<Message>> GetChatMessagesAsync (int? targetGroupId, int? lastMessageId, string token);
+        System.Threading.Tasks.Task<List<Message>> GetChatMessagesAsync (int? targetGroupId, string token, int? lastMessageId = null);
 
         /// <summary>
         /// 
@@ -155,10 +335,10 @@ namespace IO.Swagger.Api
         /// Get all chat messages from target group chat.
         /// </remarks>
         /// <param name="targetGroupId">ID of target group</param>
-        /// <param name="lastMessageId">ID of last message received</param>
         /// <param name="token">Authentication token</param>
+        /// <param name="lastMessageId">ID of last message received</param>
         /// <returns>Task of ApiResponse (List&lt;Message&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<Message>>> GetChatMessagesAsyncWithHttpInfo (int? targetGroupId, int? lastMessageId, string token);
+        System.Threading.Tasks.Task<ApiResponse<List<Message>>> GetChatMessagesAsyncWithHttpInfo (int? targetGroupId, string token, int? lastMessageId = null);
         
         /// <summary>
         /// 
@@ -390,11 +570,12 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// Register new account.
         /// </remarks>
+        /// <param name="displayName">New account&#39;s display name</param>
         /// <param name="username">New account&#39;s username</param>
         /// <param name="password">New account&#39;s password</param>
         /// <param name="email">New account&#39;s email</param>
         /// <returns>string</returns>
-        string RegisterUser (string username, string password, string email);
+        string RegisterUser (string displayName, string username, string password, string email);
   
         /// <summary>
         /// 
@@ -402,11 +583,12 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// Register new account.
         /// </remarks>
+        /// <param name="displayName">New account&#39;s display name</param>
         /// <param name="username">New account&#39;s username</param>
         /// <param name="password">New account&#39;s password</param>
         /// <param name="email">New account&#39;s email</param>
         /// <returns>ApiResponse of string</returns>
-        ApiResponse<string> RegisterUserWithHttpInfo (string username, string password, string email);
+        ApiResponse<string> RegisterUserWithHttpInfo (string displayName, string username, string password, string email);
 
         /// <summary>
         /// 
@@ -414,11 +596,12 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// Register new account.
         /// </remarks>
+        /// <param name="displayName">New account&#39;s display name</param>
         /// <param name="username">New account&#39;s username</param>
         /// <param name="password">New account&#39;s password</param>
         /// <param name="email">New account&#39;s email</param>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> RegisterUserAsync (string username, string password, string email);
+        System.Threading.Tasks.Task<string> RegisterUserAsync (string displayName, string username, string password, string email);
 
         /// <summary>
         /// 
@@ -426,11 +609,12 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// Register new account.
         /// </remarks>
+        /// <param name="displayName">New account&#39;s display name</param>
         /// <param name="username">New account&#39;s username</param>
         /// <param name="password">New account&#39;s password</param>
         /// <param name="email">New account&#39;s email</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> RegisterUserAsyncWithHttpInfo (string username, string password, string email);
+        System.Threading.Tasks.Task<ApiResponse<string>> RegisterUserAsyncWithHttpInfo (string displayName, string username, string password, string email);
         
         /// <summary>
         /// 
@@ -564,8 +748,8 @@ namespace IO.Swagger.Api
         /// </remarks>
         /// <param name="targetUserId">ID of target user</param>
         /// <param name="token">Authentication token</param>
-        /// <returns>List&lt;UserProfile&gt;</returns>
-        List<UserProfile> GetProfileById (int? targetUserId, string token);
+        /// <returns>UserProfile</returns>
+        UserProfile GetProfileById (int? targetUserId, string token);
   
         /// <summary>
         /// 
@@ -575,8 +759,8 @@ namespace IO.Swagger.Api
         /// </remarks>
         /// <param name="targetUserId">ID of target user</param>
         /// <param name="token">Authentication token</param>
-        /// <returns>ApiResponse of List&lt;UserProfile&gt;</returns>
-        ApiResponse<List<UserProfile>> GetProfileByIdWithHttpInfo (int? targetUserId, string token);
+        /// <returns>ApiResponse of UserProfile</returns>
+        ApiResponse<UserProfile> GetProfileByIdWithHttpInfo (int? targetUserId, string token);
 
         /// <summary>
         /// 
@@ -586,8 +770,8 @@ namespace IO.Swagger.Api
         /// </remarks>
         /// <param name="targetUserId">ID of target user</param>
         /// <param name="token">Authentication token</param>
-        /// <returns>Task of List&lt;UserProfile&gt;</returns>
-        System.Threading.Tasks.Task<List<UserProfile>> GetProfileByIdAsync (int? targetUserId, string token);
+        /// <returns>Task of UserProfile</returns>
+        System.Threading.Tasks.Task<UserProfile> GetProfileByIdAsync (int? targetUserId, string token);
 
         /// <summary>
         /// 
@@ -597,8 +781,8 @@ namespace IO.Swagger.Api
         /// </remarks>
         /// <param name="targetUserId">ID of target user</param>
         /// <param name="token">Authentication token</param>
-        /// <returns>Task of ApiResponse (List&lt;UserProfile&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<UserProfile>>> GetProfileByIdAsyncWithHttpInfo (int? targetUserId, string token);
+        /// <returns>Task of ApiResponse (UserProfile)</returns>
+        System.Threading.Tasks.Task<ApiResponse<UserProfile>> GetProfileByIdAsyncWithHttpInfo (int? targetUserId, string token);
         
     }
   
@@ -677,6 +861,171 @@ namespace IO.Swagger.Api
             this.Configuration.AddDefaultHeader(key, value);
         }
    
+        
+        /// <summary>
+        ///  Get specific chat.
+        /// </summary>
+        /// <param name="targetId">ID of target group</param> 
+        /// <param name="token">Authentication token</param> 
+        /// <returns>Chat</returns>
+        public Chat GetChat (int? targetId, string token)
+        {
+             ApiResponse<Chat> response = GetChatWithHttpInfo(targetId, token);
+             return response.Data;
+        }
+
+        /// <summary>
+        ///  Get specific chat.
+        /// </summary>
+        /// <param name="targetId">ID of target group</param> 
+        /// <param name="token">Authentication token</param> 
+        /// <returns>ApiResponse of Chat</returns>
+        public ApiResponse< Chat > GetChatWithHttpInfo (int? targetId, string token)
+        {
+            
+            // verify the required parameter 'targetId' is set
+            if (targetId == null)
+                throw new ApiException(400, "Missing required parameter 'targetId' when calling DefaultApi->GetChat");
+            
+            // verify the required parameter 'token' is set
+            if (token == null)
+                throw new ApiException(400, "Missing required parameter 'token' when calling DefaultApi->GetChat");
+            
+    
+            var path_ = "/chat";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            Object postBody = null;
+
+            // to determine the Content-Type header
+            String[] httpContentTypes = new String[] {
+                "application/json"
+            };
+            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+
+            // to determine the Accept header
+            String[] httpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
+            if (httpHeaderAccept != null)
+                headerParams.Add("Accept", httpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            if (targetId != null) queryParams.Add("targetId", Configuration.ApiClient.ParameterToString(targetId)); // query parameter
+            
+            if (token != null) headerParams.Add("Token", Configuration.ApiClient.ParameterToString(token)); // header parameter
+            
+            
+            
+
+            
+    
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, 
+                Method.GET, queryParams, postBody, headerParams, formParams, fileParams,
+                pathParams, httpContentType);
+
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling GetChat: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling GetChat: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<Chat>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Chat) Configuration.ApiClient.Deserialize(response, typeof(Chat)));
+            
+        }
+    
+        /// <summary>
+        ///  Get specific chat.
+        /// </summary>
+        /// <param name="targetId">ID of target group</param>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of Chat</returns>
+        public async System.Threading.Tasks.Task<Chat> GetChatAsync (int? targetId, string token)
+        {
+             ApiResponse<Chat> response = await GetChatAsyncWithHttpInfo(targetId, token);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        ///  Get specific chat.
+        /// </summary>
+        /// <param name="targetId">ID of target group</param>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of ApiResponse (Chat)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Chat>> GetChatAsyncWithHttpInfo (int? targetId, string token)
+        {
+            // verify the required parameter 'targetId' is set
+            if (targetId == null) throw new ApiException(400, "Missing required parameter 'targetId' when calling GetChat");
+            // verify the required parameter 'token' is set
+            if (token == null) throw new ApiException(400, "Missing required parameter 'token' when calling GetChat");
+            
+    
+            var path_ = "/chat";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            Object postBody = null;
+
+            // to determine the Content-Type header
+            String[] httpContentTypes = new String[] {
+                "application/json"
+            };
+            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+
+            // to determine the Accept header
+            String[] httpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
+            if (httpHeaderAccept != null)
+                headerParams.Add("Accept", httpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            if (targetId != null) queryParams.Add("targetId", Configuration.ApiClient.ParameterToString(targetId)); // query parameter
+            
+            if (token != null) headerParams.Add("Token", Configuration.ApiClient.ParameterToString(token)); // header parameter
+            
+            
+            
+
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, 
+                Method.GET, queryParams, postBody, headerParams, formParams, fileParams, 
+                pathParams, httpContentType);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling GetChat: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling GetChat: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<Chat>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Chat) Configuration.ApiClient.Deserialize(response, typeof(Chat)));
+            
+        }
         
         /// <summary>
         ///  Send a chat message.
@@ -852,6 +1201,513 @@ namespace IO.Swagger.Api
             return new ApiResponse<Message>(statusCode,
                 response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (Message) Configuration.ApiClient.Deserialize(response, typeof(Message)));
+            
+        }
+        
+        /// <summary>
+        ///  Get all chats.
+        /// </summary>
+        /// <param name="token">Authentication token</param> 
+        /// <returns>List&lt;Chat&gt;</returns>
+        public List<Chat> GetChats (string token)
+        {
+             ApiResponse<List<Chat>> response = GetChatsWithHttpInfo(token);
+             return response.Data;
+        }
+
+        /// <summary>
+        ///  Get all chats.
+        /// </summary>
+        /// <param name="token">Authentication token</param> 
+        /// <returns>ApiResponse of List&lt;Chat&gt;</returns>
+        public ApiResponse< List<Chat> > GetChatsWithHttpInfo (string token)
+        {
+            
+            // verify the required parameter 'token' is set
+            if (token == null)
+                throw new ApiException(400, "Missing required parameter 'token' when calling DefaultApi->GetChats");
+            
+    
+            var path_ = "/chat/all";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            Object postBody = null;
+
+            // to determine the Content-Type header
+            String[] httpContentTypes = new String[] {
+                "application/json"
+            };
+            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+
+            // to determine the Accept header
+            String[] httpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
+            if (httpHeaderAccept != null)
+                headerParams.Add("Accept", httpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            if (token != null) headerParams.Add("Token", Configuration.ApiClient.ParameterToString(token)); // header parameter
+            
+            
+            
+
+            
+    
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, 
+                Method.GET, queryParams, postBody, headerParams, formParams, fileParams,
+                pathParams, httpContentType);
+
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling GetChats: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling GetChats: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<List<Chat>>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (List<Chat>) Configuration.ApiClient.Deserialize(response, typeof(List<Chat>)));
+            
+        }
+    
+        /// <summary>
+        ///  Get all chats.
+        /// </summary>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of List&lt;Chat&gt;</returns>
+        public async System.Threading.Tasks.Task<List<Chat>> GetChatsAsync (string token)
+        {
+             ApiResponse<List<Chat>> response = await GetChatsAsyncWithHttpInfo(token);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        ///  Get all chats.
+        /// </summary>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of ApiResponse (List&lt;Chat&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<Chat>>> GetChatsAsyncWithHttpInfo (string token)
+        {
+            // verify the required parameter 'token' is set
+            if (token == null) throw new ApiException(400, "Missing required parameter 'token' when calling GetChats");
+            
+    
+            var path_ = "/chat/all";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            Object postBody = null;
+
+            // to determine the Content-Type header
+            String[] httpContentTypes = new String[] {
+                "application/json"
+            };
+            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+
+            // to determine the Accept header
+            String[] httpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
+            if (httpHeaderAccept != null)
+                headerParams.Add("Accept", httpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            
+            if (token != null) headerParams.Add("Token", Configuration.ApiClient.ParameterToString(token)); // header parameter
+            
+            
+            
+
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, 
+                Method.GET, queryParams, postBody, headerParams, formParams, fileParams, 
+                pathParams, httpContentType);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling GetChats: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling GetChats: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<List<Chat>>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (List<Chat>) Configuration.ApiClient.Deserialize(response, typeof(List<Chat>)));
+            
+        }
+        
+        /// <summary>
+        ///  Invite user to chat group.
+        /// </summary>
+        /// <param name="chatId">ID of group chat</param> 
+        /// <param name="username">Username of user to be added to chat group</param> 
+        /// <param name="token">Authentication token</param> 
+        /// <returns>bool?</returns>
+        public bool? InviteUserToChat (int? chatId, string username, string token)
+        {
+             ApiResponse<bool?> response = InviteUserToChatWithHttpInfo(chatId, username, token);
+             return response.Data;
+        }
+
+        /// <summary>
+        ///  Invite user to chat group.
+        /// </summary>
+        /// <param name="chatId">ID of group chat</param> 
+        /// <param name="username">Username of user to be added to chat group</param> 
+        /// <param name="token">Authentication token</param> 
+        /// <returns>ApiResponse of bool?</returns>
+        public ApiResponse< bool? > InviteUserToChatWithHttpInfo (int? chatId, string username, string token)
+        {
+            
+            // verify the required parameter 'chatId' is set
+            if (chatId == null)
+                throw new ApiException(400, "Missing required parameter 'chatId' when calling DefaultApi->InviteUserToChat");
+            
+            // verify the required parameter 'username' is set
+            if (username == null)
+                throw new ApiException(400, "Missing required parameter 'username' when calling DefaultApi->InviteUserToChat");
+            
+            // verify the required parameter 'token' is set
+            if (token == null)
+                throw new ApiException(400, "Missing required parameter 'token' when calling DefaultApi->InviteUserToChat");
+            
+    
+            var path_ = "/chat/invite";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            Object postBody = null;
+
+            // to determine the Content-Type header
+            String[] httpContentTypes = new String[] {
+                "application/json"
+            };
+            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+
+            // to determine the Accept header
+            String[] httpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
+            if (httpHeaderAccept != null)
+                headerParams.Add("Accept", httpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            if (chatId != null) queryParams.Add("chatId", Configuration.ApiClient.ParameterToString(chatId)); // query parameter
+            if (username != null) queryParams.Add("username", Configuration.ApiClient.ParameterToString(username)); // query parameter
+            
+            if (token != null) headerParams.Add("Token", Configuration.ApiClient.ParameterToString(token)); // header parameter
+            
+            
+            
+
+            
+    
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, 
+                Method.POST, queryParams, postBody, headerParams, formParams, fileParams,
+                pathParams, httpContentType);
+
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling InviteUserToChat: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling InviteUserToChat: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<bool?>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (bool?) Configuration.ApiClient.Deserialize(response, typeof(bool?)));
+            
+        }
+    
+        /// <summary>
+        ///  Invite user to chat group.
+        /// </summary>
+        /// <param name="chatId">ID of group chat</param>
+        /// <param name="username">Username of user to be added to chat group</param>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of bool?</returns>
+        public async System.Threading.Tasks.Task<bool?> InviteUserToChatAsync (int? chatId, string username, string token)
+        {
+             ApiResponse<bool?> response = await InviteUserToChatAsyncWithHttpInfo(chatId, username, token);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        ///  Invite user to chat group.
+        /// </summary>
+        /// <param name="chatId">ID of group chat</param>
+        /// <param name="username">Username of user to be added to chat group</param>
+        /// <param name="token">Authentication token</param>
+        /// <returns>Task of ApiResponse (bool?)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<bool?>> InviteUserToChatAsyncWithHttpInfo (int? chatId, string username, string token)
+        {
+            // verify the required parameter 'chatId' is set
+            if (chatId == null) throw new ApiException(400, "Missing required parameter 'chatId' when calling InviteUserToChat");
+            // verify the required parameter 'username' is set
+            if (username == null) throw new ApiException(400, "Missing required parameter 'username' when calling InviteUserToChat");
+            // verify the required parameter 'token' is set
+            if (token == null) throw new ApiException(400, "Missing required parameter 'token' when calling InviteUserToChat");
+            
+    
+            var path_ = "/chat/invite";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            Object postBody = null;
+
+            // to determine the Content-Type header
+            String[] httpContentTypes = new String[] {
+                "application/json"
+            };
+            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+
+            // to determine the Accept header
+            String[] httpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
+            if (httpHeaderAccept != null)
+                headerParams.Add("Accept", httpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            if (chatId != null) queryParams.Add("chatId", Configuration.ApiClient.ParameterToString(chatId)); // query parameter
+            if (username != null) queryParams.Add("username", Configuration.ApiClient.ParameterToString(username)); // query parameter
+            
+            if (token != null) headerParams.Add("Token", Configuration.ApiClient.ParameterToString(token)); // header parameter
+            
+            
+            
+
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, 
+                Method.POST, queryParams, postBody, headerParams, formParams, fileParams, 
+                pathParams, httpContentType);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling InviteUserToChat: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling InviteUserToChat: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<bool?>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (bool?) Configuration.ApiClient.Deserialize(response, typeof(bool?)));
+            
+        }
+        
+        /// <summary>
+        ///  Update chat info.
+        /// </summary>
+        /// <param name="token">Authentication token</param> 
+        /// <param name="chatId">Chat group&#39;s ID</param> 
+        /// <param name="chatTitle">Chat group&#39;s new title</param> 
+        /// <returns>bool?</returns>
+        public bool? UpdateChat (string token, int? chatId, string chatTitle)
+        {
+             ApiResponse<bool?> response = UpdateChatWithHttpInfo(token, chatId, chatTitle);
+             return response.Data;
+        }
+
+        /// <summary>
+        ///  Update chat info.
+        /// </summary>
+        /// <param name="token">Authentication token</param> 
+        /// <param name="chatId">Chat group&#39;s ID</param> 
+        /// <param name="chatTitle">Chat group&#39;s new title</param> 
+        /// <returns>ApiResponse of bool?</returns>
+        public ApiResponse< bool? > UpdateChatWithHttpInfo (string token, int? chatId, string chatTitle)
+        {
+            
+            // verify the required parameter 'token' is set
+            if (token == null)
+                throw new ApiException(400, "Missing required parameter 'token' when calling DefaultApi->UpdateChat");
+            
+            // verify the required parameter 'chatId' is set
+            if (chatId == null)
+                throw new ApiException(400, "Missing required parameter 'chatId' when calling DefaultApi->UpdateChat");
+            
+            // verify the required parameter 'chatTitle' is set
+            if (chatTitle == null)
+                throw new ApiException(400, "Missing required parameter 'chatTitle' when calling DefaultApi->UpdateChat");
+            
+    
+            var path_ = "/chat/manage";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            Object postBody = null;
+
+            // to determine the Content-Type header
+            String[] httpContentTypes = new String[] {
+                "application/json"
+            };
+            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+
+            // to determine the Accept header
+            String[] httpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
+            if (httpHeaderAccept != null)
+                headerParams.Add("Accept", httpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            if (chatId != null) queryParams.Add("chatId", Configuration.ApiClient.ParameterToString(chatId)); // query parameter
+            if (chatTitle != null) queryParams.Add("chatTitle", Configuration.ApiClient.ParameterToString(chatTitle)); // query parameter
+            
+            if (token != null) headerParams.Add("Token", Configuration.ApiClient.ParameterToString(token)); // header parameter
+            
+            
+            
+
+            
+    
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) Configuration.ApiClient.CallApi(path_, 
+                Method.PUT, queryParams, postBody, headerParams, formParams, fileParams,
+                pathParams, httpContentType);
+
+            int statusCode = (int) response.StatusCode;
+    
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UpdateChat: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UpdateChat: " + response.ErrorMessage, response.ErrorMessage);
+    
+            return new ApiResponse<bool?>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (bool?) Configuration.ApiClient.Deserialize(response, typeof(bool?)));
+            
+        }
+    
+        /// <summary>
+        ///  Update chat info.
+        /// </summary>
+        /// <param name="token">Authentication token</param>
+        /// <param name="chatId">Chat group&#39;s ID</param>
+        /// <param name="chatTitle">Chat group&#39;s new title</param>
+        /// <returns>Task of bool?</returns>
+        public async System.Threading.Tasks.Task<bool?> UpdateChatAsync (string token, int? chatId, string chatTitle)
+        {
+             ApiResponse<bool?> response = await UpdateChatAsyncWithHttpInfo(token, chatId, chatTitle);
+             return response.Data;
+
+        }
+
+        /// <summary>
+        ///  Update chat info.
+        /// </summary>
+        /// <param name="token">Authentication token</param>
+        /// <param name="chatId">Chat group&#39;s ID</param>
+        /// <param name="chatTitle">Chat group&#39;s new title</param>
+        /// <returns>Task of ApiResponse (bool?)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<bool?>> UpdateChatAsyncWithHttpInfo (string token, int? chatId, string chatTitle)
+        {
+            // verify the required parameter 'token' is set
+            if (token == null) throw new ApiException(400, "Missing required parameter 'token' when calling UpdateChat");
+            // verify the required parameter 'chatId' is set
+            if (chatId == null) throw new ApiException(400, "Missing required parameter 'chatId' when calling UpdateChat");
+            // verify the required parameter 'chatTitle' is set
+            if (chatTitle == null) throw new ApiException(400, "Missing required parameter 'chatTitle' when calling UpdateChat");
+            
+    
+            var path_ = "/chat/manage";
+    
+            var pathParams = new Dictionary<String, String>();
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            Object postBody = null;
+
+            // to determine the Content-Type header
+            String[] httpContentTypes = new String[] {
+                "application/json"
+            };
+            String httpContentType = Configuration.ApiClient.SelectHeaderContentType(httpContentTypes);
+
+            // to determine the Accept header
+            String[] httpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String httpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(httpHeaderAccepts);
+            if (httpHeaderAccept != null)
+                headerParams.Add("Accept", httpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            pathParams.Add("format", "json");
+            
+            if (chatId != null) queryParams.Add("chatId", Configuration.ApiClient.ParameterToString(chatId)); // query parameter
+            if (chatTitle != null) queryParams.Add("chatTitle", Configuration.ApiClient.ParameterToString(chatTitle)); // query parameter
+            
+            if (token != null) headerParams.Add("Token", Configuration.ApiClient.ParameterToString(token)); // header parameter
+            
+            
+            
+
+            
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) await Configuration.ApiClient.CallApiAsync(path_, 
+                Method.PUT, queryParams, postBody, headerParams, formParams, fileParams, 
+                pathParams, httpContentType);
+
+            int statusCode = (int) response.StatusCode;
+ 
+            if (statusCode >= 400)
+                throw new ApiException (statusCode, "Error calling UpdateChat: " + response.Content, response.Content);
+            else if (statusCode == 0)
+                throw new ApiException (statusCode, "Error calling UpdateChat: " + response.ErrorMessage, response.ErrorMessage);
+
+            return new ApiResponse<bool?>(statusCode,
+                response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (bool?) Configuration.ApiClient.Deserialize(response, typeof(bool?)));
             
         }
         
@@ -1036,12 +1892,12 @@ namespace IO.Swagger.Api
         ///  Get all chat messages from target group chat.
         /// </summary>
         /// <param name="targetGroupId">ID of target group</param> 
-        /// <param name="lastMessageId">ID of last message received</param> 
         /// <param name="token">Authentication token</param> 
+        /// <param name="lastMessageId">ID of last message received</param> 
         /// <returns>List&lt;Message&gt;</returns>
-        public List<Message> GetChatMessages (int? targetGroupId, int? lastMessageId, string token)
+        public List<Message> GetChatMessages (int? targetGroupId, string token, int? lastMessageId = null)
         {
-             ApiResponse<List<Message>> response = GetChatMessagesWithHttpInfo(targetGroupId, lastMessageId, token);
+             ApiResponse<List<Message>> response = GetChatMessagesWithHttpInfo(targetGroupId, token, lastMessageId);
              return response.Data;
         }
 
@@ -1049,19 +1905,15 @@ namespace IO.Swagger.Api
         ///  Get all chat messages from target group chat.
         /// </summary>
         /// <param name="targetGroupId">ID of target group</param> 
-        /// <param name="lastMessageId">ID of last message received</param> 
         /// <param name="token">Authentication token</param> 
+        /// <param name="lastMessageId">ID of last message received</param> 
         /// <returns>ApiResponse of List&lt;Message&gt;</returns>
-        public ApiResponse< List<Message> > GetChatMessagesWithHttpInfo (int? targetGroupId, int? lastMessageId, string token)
+        public ApiResponse< List<Message> > GetChatMessagesWithHttpInfo (int? targetGroupId, string token, int? lastMessageId = null)
         {
             
             // verify the required parameter 'targetGroupId' is set
             if (targetGroupId == null)
                 throw new ApiException(400, "Missing required parameter 'targetGroupId' when calling DefaultApi->GetChatMessages");
-            
-            // verify the required parameter 'lastMessageId' is set
-            if (lastMessageId == null)
-                throw new ApiException(400, "Missing required parameter 'lastMessageId' when calling DefaultApi->GetChatMessages");
             
             // verify the required parameter 'token' is set
             if (token == null)
@@ -1127,12 +1979,12 @@ namespace IO.Swagger.Api
         ///  Get all chat messages from target group chat.
         /// </summary>
         /// <param name="targetGroupId">ID of target group</param>
-        /// <param name="lastMessageId">ID of last message received</param>
         /// <param name="token">Authentication token</param>
+        /// <param name="lastMessageId">ID of last message received</param>
         /// <returns>Task of List&lt;Message&gt;</returns>
-        public async System.Threading.Tasks.Task<List<Message>> GetChatMessagesAsync (int? targetGroupId, int? lastMessageId, string token)
+        public async System.Threading.Tasks.Task<List<Message>> GetChatMessagesAsync (int? targetGroupId, string token, int? lastMessageId = null)
         {
-             ApiResponse<List<Message>> response = await GetChatMessagesAsyncWithHttpInfo(targetGroupId, lastMessageId, token);
+             ApiResponse<List<Message>> response = await GetChatMessagesAsyncWithHttpInfo(targetGroupId, token, lastMessageId);
              return response.Data;
 
         }
@@ -1141,15 +1993,13 @@ namespace IO.Swagger.Api
         ///  Get all chat messages from target group chat.
         /// </summary>
         /// <param name="targetGroupId">ID of target group</param>
-        /// <param name="lastMessageId">ID of last message received</param>
         /// <param name="token">Authentication token</param>
+        /// <param name="lastMessageId">ID of last message received</param>
         /// <returns>Task of ApiResponse (List&lt;Message&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<Message>>> GetChatMessagesAsyncWithHttpInfo (int? targetGroupId, int? lastMessageId, string token)
+        public async System.Threading.Tasks.Task<ApiResponse<List<Message>>> GetChatMessagesAsyncWithHttpInfo (int? targetGroupId, string token, int? lastMessageId = null)
         {
             // verify the required parameter 'targetGroupId' is set
             if (targetGroupId == null) throw new ApiException(400, "Missing required parameter 'targetGroupId' when calling GetChatMessages");
-            // verify the required parameter 'lastMessageId' is set
-            if (lastMessageId == null) throw new ApiException(400, "Missing required parameter 'lastMessageId' when calling GetChatMessages");
             // verify the required parameter 'token' is set
             if (token == null) throw new ApiException(400, "Missing required parameter 'token' when calling GetChatMessages");
             
@@ -2025,25 +2875,31 @@ namespace IO.Swagger.Api
         /// <summary>
         ///  Register new account.
         /// </summary>
+        /// <param name="displayName">New account&#39;s display name</param> 
         /// <param name="username">New account&#39;s username</param> 
         /// <param name="password">New account&#39;s password</param> 
         /// <param name="email">New account&#39;s email</param> 
         /// <returns>string</returns>
-        public string RegisterUser (string username, string password, string email)
+        public string RegisterUser (string displayName, string username, string password, string email)
         {
-             ApiResponse<string> response = RegisterUserWithHttpInfo(username, password, email);
+             ApiResponse<string> response = RegisterUserWithHttpInfo(displayName, username, password, email);
              return response.Data;
         }
 
         /// <summary>
         ///  Register new account.
         /// </summary>
+        /// <param name="displayName">New account&#39;s display name</param> 
         /// <param name="username">New account&#39;s username</param> 
         /// <param name="password">New account&#39;s password</param> 
         /// <param name="email">New account&#39;s email</param> 
         /// <returns>ApiResponse of string</returns>
-        public ApiResponse< string > RegisterUserWithHttpInfo (string username, string password, string email)
+        public ApiResponse< string > RegisterUserWithHttpInfo (string displayName, string username, string password, string email)
         {
+            
+            // verify the required parameter 'displayName' is set
+            if (displayName == null)
+                throw new ApiException(400, "Missing required parameter 'displayName' when calling DefaultApi->RegisterUser");
             
             // verify the required parameter 'username' is set
             if (username == null)
@@ -2085,6 +2941,7 @@ namespace IO.Swagger.Api
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
             pathParams.Add("format", "json");
             
+            if (displayName != null) queryParams.Add("displayName", Configuration.ApiClient.ParameterToString(displayName)); // query parameter
             if (username != null) queryParams.Add("username", Configuration.ApiClient.ParameterToString(username)); // query parameter
             if (password != null) queryParams.Add("password", Configuration.ApiClient.ParameterToString(password)); // query parameter
             if (email != null) queryParams.Add("email", Configuration.ApiClient.ParameterToString(email)); // query parameter
@@ -2116,13 +2973,14 @@ namespace IO.Swagger.Api
         /// <summary>
         ///  Register new account.
         /// </summary>
+        /// <param name="displayName">New account&#39;s display name</param>
         /// <param name="username">New account&#39;s username</param>
         /// <param name="password">New account&#39;s password</param>
         /// <param name="email">New account&#39;s email</param>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> RegisterUserAsync (string username, string password, string email)
+        public async System.Threading.Tasks.Task<string> RegisterUserAsync (string displayName, string username, string password, string email)
         {
-             ApiResponse<string> response = await RegisterUserAsyncWithHttpInfo(username, password, email);
+             ApiResponse<string> response = await RegisterUserAsyncWithHttpInfo(displayName, username, password, email);
              return response.Data;
 
         }
@@ -2130,12 +2988,15 @@ namespace IO.Swagger.Api
         /// <summary>
         ///  Register new account.
         /// </summary>
+        /// <param name="displayName">New account&#39;s display name</param>
         /// <param name="username">New account&#39;s username</param>
         /// <param name="password">New account&#39;s password</param>
         /// <param name="email">New account&#39;s email</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<string>> RegisterUserAsyncWithHttpInfo (string username, string password, string email)
+        public async System.Threading.Tasks.Task<ApiResponse<string>> RegisterUserAsyncWithHttpInfo (string displayName, string username, string password, string email)
         {
+            // verify the required parameter 'displayName' is set
+            if (displayName == null) throw new ApiException(400, "Missing required parameter 'displayName' when calling RegisterUser");
             // verify the required parameter 'username' is set
             if (username == null) throw new ApiException(400, "Missing required parameter 'username' when calling RegisterUser");
             // verify the required parameter 'password' is set
@@ -2171,6 +3032,7 @@ namespace IO.Swagger.Api
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
             pathParams.Add("format", "json");
             
+            if (displayName != null) queryParams.Add("displayName", Configuration.ApiClient.ParameterToString(displayName)); // query parameter
             if (username != null) queryParams.Add("username", Configuration.ApiClient.ParameterToString(username)); // query parameter
             if (password != null) queryParams.Add("password", Configuration.ApiClient.ParameterToString(password)); // query parameter
             if (email != null) queryParams.Add("email", Configuration.ApiClient.ParameterToString(email)); // query parameter
@@ -2675,10 +3537,10 @@ namespace IO.Swagger.Api
         /// </summary>
         /// <param name="targetUserId">ID of target user</param> 
         /// <param name="token">Authentication token</param> 
-        /// <returns>List&lt;UserProfile&gt;</returns>
-        public List<UserProfile> GetProfileById (int? targetUserId, string token)
+        /// <returns>UserProfile</returns>
+        public UserProfile GetProfileById (int? targetUserId, string token)
         {
-             ApiResponse<List<UserProfile>> response = GetProfileByIdWithHttpInfo(targetUserId, token);
+             ApiResponse<UserProfile> response = GetProfileByIdWithHttpInfo(targetUserId, token);
              return response.Data;
         }
 
@@ -2687,8 +3549,8 @@ namespace IO.Swagger.Api
         /// </summary>
         /// <param name="targetUserId">ID of target user</param> 
         /// <param name="token">Authentication token</param> 
-        /// <returns>ApiResponse of List&lt;UserProfile&gt;</returns>
-        public ApiResponse< List<UserProfile> > GetProfileByIdWithHttpInfo (int? targetUserId, string token)
+        /// <returns>ApiResponse of UserProfile</returns>
+        public ApiResponse< UserProfile > GetProfileByIdWithHttpInfo (int? targetUserId, string token)
         {
             
             // verify the required parameter 'targetUserId' is set
@@ -2748,9 +3610,9 @@ namespace IO.Swagger.Api
             else if (statusCode == 0)
                 throw new ApiException (statusCode, "Error calling GetProfileById: " + response.ErrorMessage, response.ErrorMessage);
     
-            return new ApiResponse<List<UserProfile>>(statusCode,
+            return new ApiResponse<UserProfile>(statusCode,
                 response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<UserProfile>) Configuration.ApiClient.Deserialize(response, typeof(List<UserProfile>)));
+                (UserProfile) Configuration.ApiClient.Deserialize(response, typeof(UserProfile)));
             
         }
     
@@ -2759,10 +3621,10 @@ namespace IO.Swagger.Api
         /// </summary>
         /// <param name="targetUserId">ID of target user</param>
         /// <param name="token">Authentication token</param>
-        /// <returns>Task of List&lt;UserProfile&gt;</returns>
-        public async System.Threading.Tasks.Task<List<UserProfile>> GetProfileByIdAsync (int? targetUserId, string token)
+        /// <returns>Task of UserProfile</returns>
+        public async System.Threading.Tasks.Task<UserProfile> GetProfileByIdAsync (int? targetUserId, string token)
         {
-             ApiResponse<List<UserProfile>> response = await GetProfileByIdAsyncWithHttpInfo(targetUserId, token);
+             ApiResponse<UserProfile> response = await GetProfileByIdAsyncWithHttpInfo(targetUserId, token);
              return response.Data;
 
         }
@@ -2772,8 +3634,8 @@ namespace IO.Swagger.Api
         /// </summary>
         /// <param name="targetUserId">ID of target user</param>
         /// <param name="token">Authentication token</param>
-        /// <returns>Task of ApiResponse (List&lt;UserProfile&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<UserProfile>>> GetProfileByIdAsyncWithHttpInfo (int? targetUserId, string token)
+        /// <returns>Task of ApiResponse (UserProfile)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<UserProfile>> GetProfileByIdAsyncWithHttpInfo (int? targetUserId, string token)
         {
             // verify the required parameter 'targetUserId' is set
             if (targetUserId == null) throw new ApiException(400, "Missing required parameter 'targetUserId' when calling GetProfileById");
@@ -2829,9 +3691,9 @@ namespace IO.Swagger.Api
             else if (statusCode == 0)
                 throw new ApiException (statusCode, "Error calling GetProfileById: " + response.ErrorMessage, response.ErrorMessage);
 
-            return new ApiResponse<List<UserProfile>>(statusCode,
+            return new ApiResponse<UserProfile>(statusCode,
                 response.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<UserProfile>) Configuration.ApiClient.Deserialize(response, typeof(List<UserProfile>)));
+                (UserProfile) Configuration.ApiClient.Deserialize(response, typeof(UserProfile)));
             
         }
         

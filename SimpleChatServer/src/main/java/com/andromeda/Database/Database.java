@@ -1,5 +1,6 @@
 package com.andromeda.Database;
 
+import io.swagger.model.Chat;
 import io.swagger.model.Friend;
 import io.swagger.model.Message;
 import io.swagger.model.UserProfile;
@@ -114,7 +115,7 @@ public class Database {
         return profile;
     }
 
-    public static Boolean registerUser(String username, String password, String email) {
+    public static Boolean registerUser(String username, String password, String email, String displayName) {
         Boolean result = false;
 
         Connection conn = getConnection();
@@ -141,6 +142,11 @@ public class Database {
             statement.setInt(1, userId);
             statement.setString(2, verificationHash);
             statement.setString(3, verificationHash);
+            statement.executeUpdate();
+
+            statement = conn.prepareStatement("INSERT INTO userprofiles (userid, displayname) VALUES (?,?)");
+            statement.setInt(1, userId);
+            statement.setString(2, displayName);
             statement.executeUpdate();
 
             result = true;
@@ -711,5 +717,149 @@ public class Database {
         }
 
         return messages;
+    }
+
+    public static Chat getChat(int chatId) {
+        List<Integer> participants = getChatParticipants(chatId);
+        String chatTitle = getChatTitle(chatId);
+
+        Chat chat = new Chat();
+        chat.setId(chatId);
+        chat.setUsers(participants);
+        chat.setChatTitle(chatTitle);
+
+        return chat;
+    }
+
+    public static List<Chat> getChats(int userId) {
+        ArrayList<Chat> chats = null;
+
+        Connection conn = getConnection();
+        if (conn == null)
+            return chats;
+
+        try {
+            PreparedStatement statement = null;
+            statement = conn.prepareStatement("SELECT * FROM participants WHERE participant = ?");
+            statement.setInt(1, userId);
+
+            ResultSet results = statement.executeQuery();
+
+            chats = new ArrayList<Chat>();
+            while(results.next()) {
+                int chatId = results.getInt("chatId");
+                List<Integer> participants = getChatParticipants(chatId);
+                String chatTitle = getChatTitle(chatId);
+
+                Chat chat = new Chat();
+                chat.setId(chatId);
+                chat.setUsers(participants);
+                chat.setChatTitle(chatTitle);
+
+                chats.add(chat);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return chats;
+    }
+
+    public static List<Integer> getChatParticipants(int chatId) {
+        ArrayList<Integer> participants = null;
+
+        Connection conn = getConnection();
+        if (conn == null)
+            return participants;
+
+        try {
+            PreparedStatement statement = null;
+            statement = conn.prepareStatement("SELECT * FROM participants WHERE chatid = ?");
+            statement.setInt(1, chatId);
+
+            ResultSet results = statement.executeQuery();
+
+            participants = new ArrayList<Integer>();
+            while(results.next()) {
+                int participantId = results.getInt("participant");
+                participants.add(participantId);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return participants;
+    }
+
+    public static String getChatTitle(int chatId) {
+        String title = "";
+
+        Connection conn = getConnection();
+        if (conn == null)
+            return title;
+
+        try {
+            PreparedStatement statement = null;
+            statement = conn.prepareStatement("SELECT * FROM chats WHERE chatid = ?");
+            statement.setInt(1, chatId);
+
+            ResultSet results = statement.executeQuery();
+
+            results.next();
+            title = results.getString("title");
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return title;
+    }
+
+    public static Boolean updateChat(Integer chatId, String chatTitle) {
+        Boolean success = false;
+
+        Connection conn = getConnection();
+        if (conn == null)
+            return success;
+
+        try {
+            PreparedStatement statement = null;
+            statement = conn.prepareStatement("UPDATE chats SET title=? WHERE chatid=?");
+            statement.setString(1, chatTitle);
+            statement.setInt(2, chatId);
+            statement.executeUpdate();
+            success = true;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return success;
+    }
+
+    public static int inviteUserToChat(Integer chatId, String username) {
+        int res = 0;
+        int userId = getUserIdFromUsername(username);
+
+        if(userId == -1) {
+            res = -1;
+            return res;
+        }
+
+        Connection conn = getConnection();
+        if (conn == null)
+            return res;
+
+        try {
+
+            PreparedStatement statement = null;
+            statement = conn.prepareStatement("INSERT INTO participants (chatid, participant) VALUES (?,?)");
+            statement.setInt(1, chatId);
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+            res = 1;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return res;
     }
 }

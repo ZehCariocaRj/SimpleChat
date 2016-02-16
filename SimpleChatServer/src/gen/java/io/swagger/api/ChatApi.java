@@ -8,8 +8,9 @@ import io.swagger.annotations.ApiParam;
 
 import com.sun.jersey.multipart.FormDataParam;
 
-import io.swagger.model.Message;
+import io.swagger.model.Chat;
 import io.swagger.model.Error;
+import io.swagger.model.Message;
 
 import java.util.List;
 import io.swagger.api.NotFoundException;
@@ -28,10 +29,28 @@ import javax.ws.rs.*;
 @Consumes({ "application/json" })
 @Produces({ "application/json" })
 @io.swagger.annotations.Api(description = "the chat API")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-15T11:52:14.312-05:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-15T18:16:57.803-05:00")
 public class ChatApi  {
    private final ChatApiService delegate = ChatApiServiceFactory.getChatApi();
 
+    @GET
+    
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "", notes = "Get specific chat.", response = Chat.class, tags={  })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "chat list response", response = Chat.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 304, message = "Invalid token", response = Chat.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = Chat.class) })
+
+    public Response getChat(@ApiParam(value = "ID of target group",required=true) @QueryParam("targetId") Integer targetId
+,
+@ApiParam(value = "Authentication token" ,required=true)@HeaderParam("Token") String token,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.getChat(targetId,token,securityContext);
+    }
     @POST
     
     @Consumes({ "application/json" })
@@ -50,6 +69,61 @@ public class ChatApi  {
 @ApiParam(value = "Authentication token" ,required=true)@HeaderParam("Token") String token,@Context SecurityContext securityContext)
     throws NotFoundException {
         return delegate.sendChatMessage(targetId,message,token,securityContext);
+    }
+    @GET
+    @Path("/all")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "", notes = "Get all chats.", response = Chat.class, responseContainer = "List", tags={  })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "chat list response", response = Chat.class, responseContainer = "List"),
+        
+        @io.swagger.annotations.ApiResponse(code = 304, message = "Invalid token", response = Chat.class, responseContainer = "List"),
+        
+        @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = Chat.class, responseContainer = "List") })
+
+    public Response getChats(
+@ApiParam(value = "Authentication token" ,required=true)@HeaderParam("Token") String token,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.getChats(token,securityContext);
+    }
+    @POST
+    @Path("/invite")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "", notes = "Invite user to chat group.", response = Boolean.class, tags={  })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "invite to chat group response", response = Boolean.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 304, message = "Invalid token", response = Boolean.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = Boolean.class) })
+
+    public Response inviteUserToChat(@ApiParam(value = "ID of group chat",required=true) @QueryParam("chatId") Integer chatId
+,@ApiParam(value = "Username of user to be added to chat group",required=true) @QueryParam("username") String username
+,
+@ApiParam(value = "Authentication token" ,required=true)@HeaderParam("Token") String token,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.inviteUserToChat(chatId,username,token,securityContext);
+    }
+    @PUT
+    @Path("/manage")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "", notes = "Update chat info.", response = Boolean.class, tags={  })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "chat update response", response = Boolean.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 304, message = "Invalid token", response = Boolean.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = Boolean.class) })
+
+    public Response updateChat(
+@ApiParam(value = "Authentication token" ,required=true)@HeaderParam("Token") String token,@ApiParam(value = "Chat group's ID",required=true) @QueryParam("chatId") Integer chatId
+,@ApiParam(value = "Chat group's new title",required=true) @QueryParam("chatTitle") String chatTitle
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.updateChat(token,chatId,chatTitle,securityContext);
     }
     @POST
     @Path("/manage")
@@ -83,10 +157,10 @@ public class ChatApi  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = Message.class, responseContainer = "List") })
 
     public Response getChatMessages(
-@ApiParam(value = "ID of target group",required=true) @PathParam("targetGroupId") Integer targetGroupId,@ApiParam(value = "ID of last message received",required=true) @QueryParam("lastMessageId") Integer lastMessageId
-,
-@ApiParam(value = "Authentication token" ,required=true)@HeaderParam("Token") String token,@Context SecurityContext securityContext)
+@ApiParam(value = "ID of target group",required=true) @PathParam("targetGroupId") Integer targetGroupId,
+@ApiParam(value = "Authentication token" ,required=true)@HeaderParam("Token") String token,@ApiParam(value = "ID of last message received") @QueryParam("lastMessageId") Integer lastMessageId
+,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return delegate.getChatMessages(targetGroupId,lastMessageId,token,securityContext);
+        return delegate.getChatMessages(targetGroupId,token,lastMessageId,securityContext);
     }
 }

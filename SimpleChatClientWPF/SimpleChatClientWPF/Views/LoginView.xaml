@@ -41,7 +41,7 @@
         <StackPanel Grid.Row="4" Grid.ColumnSpan="2">
             <TextBlock></TextBlock>
             <CheckBox Content=" Automatically sign in" Padding="0,0,0,8" IsChecked="{Binding AutomaticSignIn}"/>
-            <CheckBox Content=" Remember password" Padding="0,0,0,8" IsChecked="{Binding RemmeberPassword}"/>
+            <CheckBox Content=" Remember password" Padding="0,0,0,8" IsChecked="{Binding RememberPassword}"/>
         </StackPanel>
 
 

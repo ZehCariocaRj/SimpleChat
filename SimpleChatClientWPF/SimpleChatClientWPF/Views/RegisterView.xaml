@@ -23,6 +23,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
         <Image Height="80" Source="/SimpleChatClientWPF;component/banner.png" Grid.ColumnSpan="2" Grid.RowSpan="1" Grid.Row="0" />
@@ -35,22 +36,26 @@
         </StackPanel>
         
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2">
+            <Label Content="DisplayName" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox TextWrapping="Wrap" Text="{Binding DisplayName}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="2">
             <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <PasswordBox Name="Password" PasswordChanged="Password_PasswordChanged"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="4" Grid.ColumnSpan="2">
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2">
             <Label Content="Password Confirm" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <PasswordBox Name="PasswordConfirm" PasswordChanged="Password_PasswordConfirmChanged"/>
         </StackPanel>
 
-
-        <StackPanel Grid.Row="5" Grid.ColumnSpan="2">
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="2">
             <Label Content="Email Address" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <TextBox TextWrapping="Wrap" Text="{Binding Email}"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="6" Grid.ColumnSpan="2">
+        <StackPanel Grid.Row="7" Grid.ColumnSpan="2">
             <TextBlock Height="8"></TextBlock>
             <Button IsDefault="True" Content="Register" Name="RegsterButton" Command="{Binding PerformRegisterCommand}" Padding="0,4,0,4"/>
             <Button Content="Back" Command="{Binding GoBackViewCommand}" Padding="0,4,0,4"/>

@@ -28,7 +28,7 @@ import javax.ws.rs.*;
 @Consumes({ "application/json" })
 @Produces({ "application/json" })
 @io.swagger.annotations.Api(description = "the user API")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-15T11:52:14.312-05:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-15T18:16:57.803-05:00")
 public class UserApi  {
    private final UserApiService delegate = UserApiServiceFactory.getUserApi();
 
@@ -82,12 +82,13 @@ public class UserApi  {
         
         @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = String.class) })
 
-    public Response registerUser(@ApiParam(value = "New account's username",required=true) @QueryParam("username") String username
+    public Response registerUser(@ApiParam(value = "New account's display name",required=true) @QueryParam("displayName") String displayName
+,@ApiParam(value = "New account's username",required=true) @QueryParam("username") String username
 ,@ApiParam(value = "New account's password",required=true) @QueryParam("password") String password
 ,@ApiParam(value = "New account's email",required=true) @QueryParam("email") String email
 ,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return delegate.registerUser(username,password,email,securityContext);
+        return delegate.registerUser(displayName,username,password,email,securityContext);
     }
     @DELETE
     
@@ -145,13 +146,13 @@ public class UserApi  {
     @Path("/{targetUserId}")
     @Consumes({ "application/json" })
     @Produces({ "application/json" })
-    @io.swagger.annotations.ApiOperation(value = "", notes = "Get profile of target user.", response = UserProfile.class, responseContainer = "List", tags={  })
+    @io.swagger.annotations.ApiOperation(value = "", notes = "Get profile of target user.", response = UserProfile.class, tags={  })
     @io.swagger.annotations.ApiResponses(value = { 
-        @io.swagger.annotations.ApiResponse(code = 200, message = "user profile response", response = UserProfile.class, responseContainer = "List"),
+        @io.swagger.annotations.ApiResponse(code = 200, message = "user profile response", response = UserProfile.class),
         
-        @io.swagger.annotations.ApiResponse(code = 304, message = "Invalid token", response = UserProfile.class, responseContainer = "List"),
+        @io.swagger.annotations.ApiResponse(code = 304, message = "Invalid token", response = UserProfile.class),
         
-        @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = UserProfile.class, responseContainer = "List") })
+        @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = UserProfile.class) })
 
     public Response getProfileById(
 @ApiParam(value = "ID of target user",required=true) @PathParam("targetUserId") Integer targetUserId,

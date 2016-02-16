@@ -39,7 +39,7 @@ public class UserApiServiceImpl extends UserApiService {
     }
 
     @Override
-    public Response registerUser(String username, String password, String email, SecurityContext securityContext)
+    public Response registerUser(String displayName, String username, String password, String email, SecurityContext securityContext)
     throws NotFoundException {
         Boolean exists = Database.checkUsernameExists(username);
 
@@ -50,7 +50,7 @@ public class UserApiServiceImpl extends UserApiService {
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
-        Boolean success = Database.registerUser(username, password, email);
+        Boolean success = Database.registerUser(username, password, email, displayName);
         return Response.ok(success).build();
     }
 

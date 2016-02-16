@@ -88,6 +88,19 @@ namespace SimpleChatClientWPF.ViewModels
             }
         }
 
+        public string DisplayName
+        {
+            get
+            {
+                return register.DisplayName;
+            }
+            set
+            {
+                register.DisplayName = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("DisplayName"));
+            }
+        }
+
         public ICommand PerformRegisterCommand
         {
             get
@@ -133,7 +146,7 @@ namespace SimpleChatClientWPF.ViewModels
             try
             {
                 // Continue with registration process
-                if(AccountManager.RegisterUser(Username, Password, Email))
+                if(AccountManager.RegisterUser(Username, Password, Email, DisplayName))
                 {
                     // Get out of registration screen now that we're registered
                     ViewPresenter.PopView();

@@ -79,22 +79,44 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChatListModel.cs" />
     <Compile Include="Models\FriendListModel.cs" />
+    <Compile Include="Models\ChatModel.cs" />
     <Compile Include="Models\OptionsModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
     <Compile Include="ModelPresenter.cs" />
+    <Compile Include="ViewModels\ChatListViewModel.cs" />
     <Compile Include="ViewModels\FriendListViewModel.cs" />
+    <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\OptionsViewModel.cs" />
     <Compile Include="ViewModels\ViewPresenter.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="Views\InviteUserDialog.xaml.cs">
+      <DependentUpon>InviteUserDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangeChatTitleDialog.xaml.cs">
+      <DependentUpon>ChangeChatTitleDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateChatDialog.xaml.cs">
+      <DependentUpon>CreateChatDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddFriendDialog.xaml.cs">
       <DependentUpon>AddFriendDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ChatView.xaml.cs">
+      <DependentUpon>ChatView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChatListEntry.xaml.cs">
+      <DependentUpon>ChatListEntry.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FriendListEntry.xaml.cs">
       <DependentUpon>FriendListEntry.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChatListView.xaml.cs">
+      <DependentUpon>ChatListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FriendListView.xaml.cs">
       <DependentUpon>FriendListView.xaml</DependentUpon>
@@ -116,13 +138,37 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\InviteUserDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ChangeChatTitleDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CreateChatDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\AddFriendDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ChatView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChatListEntry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\FriendListEntry.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChatListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\FriendListView.xaml">
       <SubType>Designer</SubType>

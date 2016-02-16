@@ -1,0 +1,40 @@
+﻿<Window x:Class="SimpleChatClientWPF.Views.ChatView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleChatClientWPF.Views"
+        mc:Ignorable="d"
+        Title="{Binding ChatTitle}" Height="300" Width="600"
+        FocusManager.FocusedElement="{Binding ElementName=ChatSendText}" Icon="/SimpleChatClientWPF;component/icon.png">
+    <Grid Background="#FFF2F2F2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="337*"/>
+            <ColumnDefinition Width="80"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Background="#FFF2F2F2" Grid.Row="0">Chat Participants</Label>
+        <ItemsControl Grid.Row="1" Name="ParticipantList" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ScrollViewer>
+            </ScrollViewer>
+        </ItemsControl>
+
+        <StackPanel Grid.Row="2">
+            <Button Content="Invite User" Command="{Binding InviteChatCommand}" Padding="0,4,0,4"/>
+            <Button Content="Set Chat Title" Command="{Binding SetChatTitleCommand}" Padding="0,4,0,4"/>
+        </StackPanel>
+
+        <ScrollViewer Name="ChatScroll" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="4,0,0,0">
+            <TextBlock Name="ChatLog" Text="{Binding ChatLog}" TextWrapping="Wrap" Background="White"/>
+        </ScrollViewer>
+
+        <TextBox Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Name="ChatText" Text="{Binding ChatText, UpdateSourceTrigger=PropertyChanged}" Margin="4,0"/>
+        <Button IsDefault="True" Grid.Column="2" Grid.Row="3" Content="Send" Command="{Binding SendChatCommand}" Margin="0"/>
+    </Grid>
+</Window>

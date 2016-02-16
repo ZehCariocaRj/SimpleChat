@@ -35,8 +35,17 @@ namespace SimpleChatClientWPF.Views
 
         private void FriendListView_Loaded(object sender, RoutedEventArgs e)
         {
-            friendListViewModel.UpdateFriendList();
             friendListViewModel.UpdateProfile();
+            friendListViewModel.UpdateFriendList();
+        }
+
+        private void FriendList_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Views.FriendListEntry entry = (Views.FriendListEntry)FriendList.SelectedItem;
+                //friendListViewModel.OpenChat(entry.UserId);
+            }
         }
     }
 }

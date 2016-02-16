@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SimpleChatClientWPF.Views.FriendListView"
+﻿<UserControl x:Class="SimpleChatClientWPF.Views.ChatListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -30,7 +30,7 @@
             </StackPanel>
         </Grid>
 
-        <ListBox Name="FriendList" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" KeyUp="FriendList_KeyUp">
+        <ListBox Name="ChatList" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" KeyUp="ChatList_KeyUp" SelectionMode="Single">
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Delete" Command="{Binding DeleteFriendCommand}"></MenuItem>
@@ -41,7 +41,7 @@
         </ListBox>
 
         <StackPanel Grid.Row="2">
-            <Button Content="Add Friend" Command="{Binding AddFriendCommand}" Padding="0,4,0,4"/>
+            <Button Content="Create Chat" Command="{Binding CreateChatCommand}" Padding="0,4,0,4"/>
             <Button Content="Options" Command="{Binding OptionsViewCommand}" Padding="0,4,0,4"/>
             <Button Content="Sign Out" Command="{Binding SignoutCommand}" Padding="0,4,0,4"/>
         </StackPanel>

@@ -129,8 +129,8 @@ namespace SimpleChatClientWPF.ViewModels
             {
                 if(AccountManager.LoginUser(Username, Password))
                 {
-                    // Login was successful, move to friend list
-                    ViewPresenter.PushView(new Views.FriendListView());
+                    // Login was successful, move to chat list
+                    ViewPresenter.PushView(new Views.ChatListView());
                 }
             }
             catch (ApiException e)
