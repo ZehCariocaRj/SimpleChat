@@ -118,6 +118,10 @@ public class Database {
     public static Boolean registerUser(String username, String password, String email, String displayName) {
         Boolean result = false;
 
+        if(displayName == null) {
+            displayName = username;
+        }
+
         Connection conn = getConnection();
         if (conn == null)
             return result;

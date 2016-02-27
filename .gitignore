@@ -313,3 +313,4 @@ hs_err_pid*
 .idea/
 
 *.bak
+swagger-codegen/*
