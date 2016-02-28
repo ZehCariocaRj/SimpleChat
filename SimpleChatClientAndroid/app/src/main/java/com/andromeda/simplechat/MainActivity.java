@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,6 +26,8 @@ import java.util.List;
 import andromeda.com.simplechatclientandroid.R;
 import io.swagger.client.model.Chat;
 import io.swagger.client.model.UserProfile;
+
+import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
     private UpdateProfileTask mUpdateProfileTask = null;
@@ -50,16 +54,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Let you add a new chat easily
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
-        */
 
         mUsernameView = (TextView)findViewById(R.id.username);
         mDisplayNameView = (TextView)findViewById(R.id.displayName);
@@ -73,17 +76,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Load chat
-                Log.d("SimpleChat_Main", "Clicked on item: " + position);
+                Chat chat = (Chat)parent.getItemAtPosition(position);
+
+                Log.d("SimpleChat_Main", "Clicked: " + chat.getChatTitle());
+
+                Intent chatIntent = new Intent(view.getContext(), ChatActivity.class);
+                startActivity(chatIntent);
             }
         });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Post-login activity
-        Log.d("SimpleChat_Main", "Token: " + ApiGateway.getToken());
-
-
         mUpdateProfileTask = new UpdateProfileTask();
         mUpdateProfileTask.execute((Void) null);
 

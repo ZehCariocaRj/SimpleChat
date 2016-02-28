@@ -16,4 +16,5 @@
         completions."
     </string>
     <string name="prompt_username">Username</string>
+    <string name="title_activity_chat">ChatActivity</string>
 </resources>

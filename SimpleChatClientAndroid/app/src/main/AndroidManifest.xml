@@ -22,8 +22,13 @@
         </activity>
         <activity
             android:name="com.andromeda.simplechat.LoginActivity"
-            android:noHistory="true" android:excludeFromRecents="true"
-            android:label="@string/title_activity_login"></activity>
+            android:excludeFromRecents="true"
+            android:label="@string/title_activity_login"
+            android:noHistory="true" />
+        <activity
+            android:name="com.andromeda.simplechat.ChatActivity"
+            android:label="@string/title_activity_chat"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
