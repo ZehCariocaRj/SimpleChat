@@ -1,17 +1,40 @@
 package com.andromeda.simplechat;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import andromeda.com.simplechatclientandroid.R;
+import io.swagger.client.model.Chat;
+import io.swagger.client.model.UserProfile;
 
 public class MainActivity extends AppCompatActivity {
+    private UpdateProfileTask mUpdateProfileTask = null;
+    private UpdateChatTask mUpdateChatTask = null;
+    private List<Chat> mChatListData = null;
+
+    private TextView mUsernameView;
+    private TextView mDisplayNameView;
+    private ListView mChatListView;
+
+    private ChatArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +60,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         */
+
+        mUsernameView = (TextView)findViewById(R.id.username);
+        mDisplayNameView = (TextView)findViewById(R.id.displayName);
+        mChatListView = (ListView)findViewById(R.id.chat_list);
+
+        mChatListData = new ArrayList<Chat>();
+
+        adapter = new ChatArrayAdapter(this, R.layout.chat_list_entry, mChatListData);
+        mChatListView.setAdapter(adapter);
+        mChatListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Load chat
+                Log.d("SimpleChat_Main", "Clicked on item: " + position);
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Post-login activity
         Log.d("SimpleChat_Main", "Token: " + ApiGateway.getToken());
+
+
+        mUpdateProfileTask = new UpdateProfileTask();
+        mUpdateProfileTask.execute((Void) null);
+
+        mUpdateChatTask = new UpdateChatTask();
+        mUpdateChatTask.execute((Void) null);
     }
 
     @Override
@@ -65,5 +111,101 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Get the user's profile and update UI
+     */
+    public class UpdateProfileTask extends AsyncTask<Void, Void, UserProfile> {
+
+        UpdateProfileTask() {
+        }
+
+        @Override
+        protected UserProfile doInBackground(Void... params) {
+            return ApiGateway.getUserProfile();
+        }
+
+        @Override
+        protected void onPostExecute(final UserProfile profile) {
+            mUpdateProfileTask = null;
+
+            if(profile != null) {
+                mUsernameView.setText(profile.getUsername());
+                mDisplayNameView.setText(profile.getDisplayName());
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mUpdateProfileTask = null;
+        }
+    }
+
+    /**
+     * Get the user's chats  and update UI
+     */
+    public class UpdateChatTask extends AsyncTask<Void, Void, List<Chat>> {
+
+        UpdateChatTask() {
+        }
+
+        @Override
+        protected List<Chat> doInBackground(Void... params) {
+            return ApiGateway.getChats();
+        }
+
+        @Override
+        protected void onPostExecute(final List<Chat> chats) {
+            mUpdateChatTask = null;
+            adapter.addAll(chats);
+        }
+
+        @Override
+        protected void onCancelled() {
+            mUpdateChatTask = null;
+        }
+    }
+
+    private class ChatArrayAdapter extends ArrayAdapter<Chat> {
+        private class ChatHolder {
+            TextView chatTitle;
+        }
+
+        private Context context;
+        private int resource;
+
+        public ChatArrayAdapter(Context context, int resource, List<Chat> chats) {
+            super(context, resource, chats);
+            this.context = context;
+            this.resource = resource;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ChatHolder chatHolder = null;
+
+            Log.d("SimpleChat_Main", "Found position: " + position);
+
+            if(convertView == null)
+            {
+                LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+                convertView = inflater.inflate(resource, parent, false);
+
+                chatHolder = new ChatHolder();
+                chatHolder.chatTitle = (TextView)convertView.findViewById(R.id.displayName);
+
+                convertView.setTag(chatHolder);
+            }
+            else
+            {
+                chatHolder = (ChatHolder)convertView.getTag();
+            }
+
+            Chat chat = getItem(position);
+            chatHolder.chatTitle.setText(chat.getChatTitle());
+
+            return convertView;
+        }
     }
 }

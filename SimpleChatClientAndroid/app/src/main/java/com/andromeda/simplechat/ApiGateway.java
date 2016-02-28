@@ -3,7 +3,11 @@ package com.andromeda.simplechat;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import java.util.List;
+
 import io.swagger.client.ApiException;
+import io.swagger.client.model.Chat;
+import io.swagger.client.model.UserProfile;
 
 import static android.app.PendingIntent.getActivity;
 
@@ -82,6 +86,34 @@ public class ApiGateway {
 
         return true;
     }
+
+    public static UserProfile getUserProfile() {
+        io.swagger.client.api.DefaultApi api = new io.swagger.client.api.DefaultApi();
+        api.setBasePath("http://10.0.0.2:8080/api"); // Local address
+
+        try {
+            return api.getMyProfile(getToken());
+        } catch (ApiException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static List<Chat> getChats() {
+        io.swagger.client.api.DefaultApi api = new io.swagger.client.api.DefaultApi();
+        api.setBasePath("http://10.0.0.2:8080/api"); // Local address
+
+        try {
+            return api.getChats(getToken());
+        } catch (ApiException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
 
     public static Boolean getStoreLoginInformation() {
         SharedPreferences prefs = getSharedPreferences();
