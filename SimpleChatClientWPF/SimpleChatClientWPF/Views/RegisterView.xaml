@@ -36,7 +36,7 @@
         </StackPanel>
         
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2">
-            <Label Content="DisplayName" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label Content="Display Name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <TextBox TextWrapping="Wrap" Text="{Binding DisplayName}"/>
         </StackPanel>
         
@@ -50,10 +50,7 @@
             <PasswordBox Name="PasswordConfirm" PasswordChanged="Password_PasswordConfirmChanged"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="6" Grid.ColumnSpan="2">
-            <Label Content="Email Address" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding Email}"/>
-        </StackPanel>
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="2"/>
 
         <StackPanel Grid.Row="7" Grid.ColumnSpan="2">
             <TextBlock Height="8"></TextBlock>

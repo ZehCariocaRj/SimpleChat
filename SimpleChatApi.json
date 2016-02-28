@@ -59,13 +59,6 @@
         "operationId": "registerUser",
         "parameters": [
           {
-            "name": "displayName",
-            "in": "query",
-            "description": "New account's display name",
-            "required": true,
-			"type": "string"
-          }, 
-          {
             "name": "username",
             "in": "query",
             "description": "New account's username",
@@ -83,9 +76,16 @@
             "name": "email",
             "in": "query",
             "description": "New account's email",
-            "required": true,
+            "required": false,
 			"type": "string"
-          }
+          },
+          {
+            "name": "displayName",
+            "in": "query",
+            "description": "New account's display name",
+            "required": false,
+			"type": "string"
+          } 
         ],
         "responses": {
           "200": {
@@ -245,15 +245,15 @@
         }
       }
     },
-	"/user/verify/{verificationHash}": {
+	"/user/verify/{token}": {
       "get": {
-        "description": "Verify a user's account.",
+        "description": "Verify a user's token.",
         "operationId": "verifyUser",
         "parameters": [
           {
-            "name": "verificationHash",
+            "name": "token",
             "in": "path",
-            "description": "Verification hash of account",
+            "description": "Verification token of account is still active",
             "required": true,
 			"type": "string"
           }

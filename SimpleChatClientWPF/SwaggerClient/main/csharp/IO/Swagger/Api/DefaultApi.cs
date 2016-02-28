@@ -570,12 +570,12 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// Register new account.
         /// </remarks>
-        /// <param name="displayName">New account&#39;s display name</param>
         /// <param name="username">New account&#39;s username</param>
         /// <param name="password">New account&#39;s password</param>
         /// <param name="email">New account&#39;s email</param>
+        /// <param name="displayName">New account&#39;s display name</param>
         /// <returns>string</returns>
-        string RegisterUser (string displayName, string username, string password, string email);
+        string RegisterUser (string username, string password, string email = null, string displayName = null);
   
         /// <summary>
         /// 
@@ -583,12 +583,12 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// Register new account.
         /// </remarks>
-        /// <param name="displayName">New account&#39;s display name</param>
         /// <param name="username">New account&#39;s username</param>
         /// <param name="password">New account&#39;s password</param>
         /// <param name="email">New account&#39;s email</param>
+        /// <param name="displayName">New account&#39;s display name</param>
         /// <returns>ApiResponse of string</returns>
-        ApiResponse<string> RegisterUserWithHttpInfo (string displayName, string username, string password, string email);
+        ApiResponse<string> RegisterUserWithHttpInfo (string username, string password, string email = null, string displayName = null);
 
         /// <summary>
         /// 
@@ -596,12 +596,12 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// Register new account.
         /// </remarks>
-        /// <param name="displayName">New account&#39;s display name</param>
         /// <param name="username">New account&#39;s username</param>
         /// <param name="password">New account&#39;s password</param>
         /// <param name="email">New account&#39;s email</param>
+        /// <param name="displayName">New account&#39;s display name</param>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> RegisterUserAsync (string displayName, string username, string password, string email);
+        System.Threading.Tasks.Task<string> RegisterUserAsync (string username, string password, string email = null, string displayName = null);
 
         /// <summary>
         /// 
@@ -609,12 +609,12 @@ namespace IO.Swagger.Api
         /// <remarks>
         /// Register new account.
         /// </remarks>
-        /// <param name="displayName">New account&#39;s display name</param>
         /// <param name="username">New account&#39;s username</param>
         /// <param name="password">New account&#39;s password</param>
         /// <param name="email">New account&#39;s email</param>
+        /// <param name="displayName">New account&#39;s display name</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> RegisterUserAsyncWithHttpInfo (string displayName, string username, string password, string email);
+        System.Threading.Tasks.Task<ApiResponse<string>> RegisterUserAsyncWithHttpInfo (string username, string password, string email = null, string displayName = null);
         
         /// <summary>
         /// 
@@ -704,41 +704,41 @@ namespace IO.Swagger.Api
         /// 
         /// </summary>
         /// <remarks>
-        /// Verify a user&#39;s account.
+        /// Verify a user&#39;s token.
         /// </remarks>
-        /// <param name="verificationHash">Verification hash of account</param>
+        /// <param name="token">Verification token of account is still active</param>
         /// <returns>bool?</returns>
-        bool? VerifyUser (string verificationHash);
+        bool? VerifyUser (string token);
   
         /// <summary>
         /// 
         /// </summary>
         /// <remarks>
-        /// Verify a user&#39;s account.
+        /// Verify a user&#39;s token.
         /// </remarks>
-        /// <param name="verificationHash">Verification hash of account</param>
+        /// <param name="token">Verification token of account is still active</param>
         /// <returns>ApiResponse of bool?</returns>
-        ApiResponse<bool?> VerifyUserWithHttpInfo (string verificationHash);
+        ApiResponse<bool?> VerifyUserWithHttpInfo (string token);
 
         /// <summary>
         /// 
         /// </summary>
         /// <remarks>
-        /// Verify a user&#39;s account.
+        /// Verify a user&#39;s token.
         /// </remarks>
-        /// <param name="verificationHash">Verification hash of account</param>
+        /// <param name="token">Verification token of account is still active</param>
         /// <returns>Task of bool?</returns>
-        System.Threading.Tasks.Task<bool?> VerifyUserAsync (string verificationHash);
+        System.Threading.Tasks.Task<bool?> VerifyUserAsync (string token);
 
         /// <summary>
         /// 
         /// </summary>
         /// <remarks>
-        /// Verify a user&#39;s account.
+        /// Verify a user&#39;s token.
         /// </remarks>
-        /// <param name="verificationHash">Verification hash of account</param>
+        /// <param name="token">Verification token of account is still active</param>
         /// <returns>Task of ApiResponse (bool?)</returns>
-        System.Threading.Tasks.Task<ApiResponse<bool?>> VerifyUserAsyncWithHttpInfo (string verificationHash);
+        System.Threading.Tasks.Task<ApiResponse<bool?>> VerifyUserAsyncWithHttpInfo (string token);
         
         /// <summary>
         /// 
@@ -2875,31 +2875,27 @@ namespace IO.Swagger.Api
         /// <summary>
         ///  Register new account.
         /// </summary>
-        /// <param name="displayName">New account&#39;s display name</param> 
         /// <param name="username">New account&#39;s username</param> 
         /// <param name="password">New account&#39;s password</param> 
         /// <param name="email">New account&#39;s email</param> 
+        /// <param name="displayName">New account&#39;s display name</param> 
         /// <returns>string</returns>
-        public string RegisterUser (string displayName, string username, string password, string email)
+        public string RegisterUser (string username, string password, string email = null, string displayName = null)
         {
-             ApiResponse<string> response = RegisterUserWithHttpInfo(displayName, username, password, email);
+             ApiResponse<string> response = RegisterUserWithHttpInfo(username, password, email, displayName);
              return response.Data;
         }
 
         /// <summary>
         ///  Register new account.
         /// </summary>
-        /// <param name="displayName">New account&#39;s display name</param> 
         /// <param name="username">New account&#39;s username</param> 
         /// <param name="password">New account&#39;s password</param> 
         /// <param name="email">New account&#39;s email</param> 
+        /// <param name="displayName">New account&#39;s display name</param> 
         /// <returns>ApiResponse of string</returns>
-        public ApiResponse< string > RegisterUserWithHttpInfo (string displayName, string username, string password, string email)
+        public ApiResponse< string > RegisterUserWithHttpInfo (string username, string password, string email = null, string displayName = null)
         {
-            
-            // verify the required parameter 'displayName' is set
-            if (displayName == null)
-                throw new ApiException(400, "Missing required parameter 'displayName' when calling DefaultApi->RegisterUser");
             
             // verify the required parameter 'username' is set
             if (username == null)
@@ -2908,10 +2904,6 @@ namespace IO.Swagger.Api
             // verify the required parameter 'password' is set
             if (password == null)
                 throw new ApiException(400, "Missing required parameter 'password' when calling DefaultApi->RegisterUser");
-            
-            // verify the required parameter 'email' is set
-            if (email == null)
-                throw new ApiException(400, "Missing required parameter 'email' when calling DefaultApi->RegisterUser");
             
     
             var path_ = "/user";
@@ -2941,10 +2933,10 @@ namespace IO.Swagger.Api
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
             pathParams.Add("format", "json");
             
-            if (displayName != null) queryParams.Add("displayName", Configuration.ApiClient.ParameterToString(displayName)); // query parameter
             if (username != null) queryParams.Add("username", Configuration.ApiClient.ParameterToString(username)); // query parameter
             if (password != null) queryParams.Add("password", Configuration.ApiClient.ParameterToString(password)); // query parameter
             if (email != null) queryParams.Add("email", Configuration.ApiClient.ParameterToString(email)); // query parameter
+            if (displayName != null) queryParams.Add("displayName", Configuration.ApiClient.ParameterToString(displayName)); // query parameter
             
             
             
@@ -2973,14 +2965,14 @@ namespace IO.Swagger.Api
         /// <summary>
         ///  Register new account.
         /// </summary>
-        /// <param name="displayName">New account&#39;s display name</param>
         /// <param name="username">New account&#39;s username</param>
         /// <param name="password">New account&#39;s password</param>
         /// <param name="email">New account&#39;s email</param>
+        /// <param name="displayName">New account&#39;s display name</param>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> RegisterUserAsync (string displayName, string username, string password, string email)
+        public async System.Threading.Tasks.Task<string> RegisterUserAsync (string username, string password, string email = null, string displayName = null)
         {
-             ApiResponse<string> response = await RegisterUserAsyncWithHttpInfo(displayName, username, password, email);
+             ApiResponse<string> response = await RegisterUserAsyncWithHttpInfo(username, password, email, displayName);
              return response.Data;
 
         }
@@ -2988,21 +2980,17 @@ namespace IO.Swagger.Api
         /// <summary>
         ///  Register new account.
         /// </summary>
-        /// <param name="displayName">New account&#39;s display name</param>
         /// <param name="username">New account&#39;s username</param>
         /// <param name="password">New account&#39;s password</param>
         /// <param name="email">New account&#39;s email</param>
+        /// <param name="displayName">New account&#39;s display name</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<string>> RegisterUserAsyncWithHttpInfo (string displayName, string username, string password, string email)
+        public async System.Threading.Tasks.Task<ApiResponse<string>> RegisterUserAsyncWithHttpInfo (string username, string password, string email = null, string displayName = null)
         {
-            // verify the required parameter 'displayName' is set
-            if (displayName == null) throw new ApiException(400, "Missing required parameter 'displayName' when calling RegisterUser");
             // verify the required parameter 'username' is set
             if (username == null) throw new ApiException(400, "Missing required parameter 'username' when calling RegisterUser");
             // verify the required parameter 'password' is set
             if (password == null) throw new ApiException(400, "Missing required parameter 'password' when calling RegisterUser");
-            // verify the required parameter 'email' is set
-            if (email == null) throw new ApiException(400, "Missing required parameter 'email' when calling RegisterUser");
             
     
             var path_ = "/user";
@@ -3032,10 +3020,10 @@ namespace IO.Swagger.Api
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
             pathParams.Add("format", "json");
             
-            if (displayName != null) queryParams.Add("displayName", Configuration.ApiClient.ParameterToString(displayName)); // query parameter
             if (username != null) queryParams.Add("username", Configuration.ApiClient.ParameterToString(username)); // query parameter
             if (password != null) queryParams.Add("password", Configuration.ApiClient.ParameterToString(password)); // query parameter
             if (email != null) queryParams.Add("email", Configuration.ApiClient.ParameterToString(email)); // query parameter
+            if (displayName != null) queryParams.Add("displayName", Configuration.ApiClient.ParameterToString(displayName)); // query parameter
             
             
             
@@ -3380,30 +3368,30 @@ namespace IO.Swagger.Api
         }
         
         /// <summary>
-        ///  Verify a user&#39;s account.
+        ///  Verify a user&#39;s token.
         /// </summary>
-        /// <param name="verificationHash">Verification hash of account</param> 
+        /// <param name="token">Verification token of account is still active</param> 
         /// <returns>bool?</returns>
-        public bool? VerifyUser (string verificationHash)
+        public bool? VerifyUser (string token)
         {
-             ApiResponse<bool?> response = VerifyUserWithHttpInfo(verificationHash);
+             ApiResponse<bool?> response = VerifyUserWithHttpInfo(token);
              return response.Data;
         }
 
         /// <summary>
-        ///  Verify a user&#39;s account.
+        ///  Verify a user&#39;s token.
         /// </summary>
-        /// <param name="verificationHash">Verification hash of account</param> 
+        /// <param name="token">Verification token of account is still active</param> 
         /// <returns>ApiResponse of bool?</returns>
-        public ApiResponse< bool? > VerifyUserWithHttpInfo (string verificationHash)
+        public ApiResponse< bool? > VerifyUserWithHttpInfo (string token)
         {
             
-            // verify the required parameter 'verificationHash' is set
-            if (verificationHash == null)
-                throw new ApiException(400, "Missing required parameter 'verificationHash' when calling DefaultApi->VerifyUser");
+            // verify the required parameter 'token' is set
+            if (token == null)
+                throw new ApiException(400, "Missing required parameter 'token' when calling DefaultApi->VerifyUser");
             
     
-            var path_ = "/user/verify/{verificationHash}";
+            var path_ = "/user/verify/{token}";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
@@ -3429,7 +3417,7 @@ namespace IO.Swagger.Api
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
             pathParams.Add("format", "json");
-            if (verificationHash != null) pathParams.Add("verificationHash", Configuration.ApiClient.ParameterToString(verificationHash)); // path parameter
+            if (token != null) pathParams.Add("token", Configuration.ApiClient.ParameterToString(token)); // path parameter
             
             
             
@@ -3457,29 +3445,29 @@ namespace IO.Swagger.Api
         }
     
         /// <summary>
-        ///  Verify a user&#39;s account.
+        ///  Verify a user&#39;s token.
         /// </summary>
-        /// <param name="verificationHash">Verification hash of account</param>
+        /// <param name="token">Verification token of account is still active</param>
         /// <returns>Task of bool?</returns>
-        public async System.Threading.Tasks.Task<bool?> VerifyUserAsync (string verificationHash)
+        public async System.Threading.Tasks.Task<bool?> VerifyUserAsync (string token)
         {
-             ApiResponse<bool?> response = await VerifyUserAsyncWithHttpInfo(verificationHash);
+             ApiResponse<bool?> response = await VerifyUserAsyncWithHttpInfo(token);
              return response.Data;
 
         }
 
         /// <summary>
-        ///  Verify a user&#39;s account.
+        ///  Verify a user&#39;s token.
         /// </summary>
-        /// <param name="verificationHash">Verification hash of account</param>
+        /// <param name="token">Verification token of account is still active</param>
         /// <returns>Task of ApiResponse (bool?)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<bool?>> VerifyUserAsyncWithHttpInfo (string verificationHash)
+        public async System.Threading.Tasks.Task<ApiResponse<bool?>> VerifyUserAsyncWithHttpInfo (string token)
         {
-            // verify the required parameter 'verificationHash' is set
-            if (verificationHash == null) throw new ApiException(400, "Missing required parameter 'verificationHash' when calling VerifyUser");
+            // verify the required parameter 'token' is set
+            if (token == null) throw new ApiException(400, "Missing required parameter 'token' when calling VerifyUser");
             
     
-            var path_ = "/user/verify/{verificationHash}";
+            var path_ = "/user/verify/{token}";
     
             var pathParams = new Dictionary<String, String>();
             var queryParams = new Dictionary<String, String>();
@@ -3505,7 +3493,7 @@ namespace IO.Swagger.Api
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
             pathParams.Add("format", "json");
-            if (verificationHash != null) pathParams.Add("verificationHash", Configuration.ApiClient.ParameterToString(verificationHash)); // path parameter
+            if (token != null) pathParams.Add("token", Configuration.ApiClient.ParameterToString(token)); // path parameter
             
             
             

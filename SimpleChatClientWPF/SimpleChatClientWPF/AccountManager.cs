@@ -228,10 +228,10 @@ namespace SimpleChatClientWPF
             return true;
         }
 
-        public static bool RegisterUser(string username, string password, string email, string displayName)
+        public static bool RegisterUser(string username, string password, string email = null, string displayName = null)
         {
             DefaultApi api = new DefaultApi("http://localhost:8080/api/");
-            var result = api.RegisterUserWithHttpInfo(displayName, username, password, email);
+            var result = api.RegisterUserWithHttpInfo(username, password, email, displayName);
             return result.Data == "true";
         }
 

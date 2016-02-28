@@ -39,7 +39,7 @@ public class UserApiServiceImpl extends UserApiService {
     }
 
     @Override
-    public Response registerUser(String displayName, String username, String password, String email, SecurityContext securityContext)
+    public Response registerUser(String username, String password, String email, String displayName, SecurityContext securityContext)
     throws NotFoundException {
         Boolean exists = Database.checkUsernameExists(username);
 
@@ -116,6 +116,7 @@ public class UserApiServiceImpl extends UserApiService {
     public Response loginUser(String username, String password, SecurityContext securityContext)
     throws NotFoundException {
         String token = Database.loginUser(username, password);
+
         if(token == null) {
             Error error = new Error();
             error.setCode(200);
@@ -127,17 +128,11 @@ public class UserApiServiceImpl extends UserApiService {
     }
 
     @Override
-    public Response verifyUser(String verificationHash, SecurityContext securityContext)
+    public Response verifyUser(String token, SecurityContext securityContext)
     throws NotFoundException {
-        Boolean verified = Database.verifyUser(verificationHash);
-        if(!verified) {
-            Error error = new Error();
-            error.setCode(201);
-            error.setMessage("Could not verify account.");
-            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
-        }
+        UserProfile currentUser = Database.verifyToken(token);
 
-        return Response.ok(verified).build();
+        return Response.ok(currentUser != null).build();
     }
 
     @Override

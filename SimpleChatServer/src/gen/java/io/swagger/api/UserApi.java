@@ -28,7 +28,7 @@ import javax.ws.rs.*;
 @Consumes({ "application/json" })
 @Produces({ "application/json" })
 @io.swagger.annotations.Api(description = "the user API")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-15T18:16:57.803-05:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-28T08:28:34.608-05:00")
 public class UserApi  {
    private final UserApiService delegate = UserApiServiceFactory.getUserApi();
 
@@ -82,13 +82,13 @@ public class UserApi  {
         
         @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = String.class) })
 
-    public Response registerUser(@ApiParam(value = "New account's display name",required=true) @QueryParam("displayName") String displayName
-,@ApiParam(value = "New account's username",required=true) @QueryParam("username") String username
+    public Response registerUser(@ApiParam(value = "New account's username",required=true) @QueryParam("username") String username
 ,@ApiParam(value = "New account's password",required=true) @QueryParam("password") String password
-,@ApiParam(value = "New account's email",required=true) @QueryParam("email") String email
+,@ApiParam(value = "New account's email") @QueryParam("email") String email
+,@ApiParam(value = "New account's display name") @QueryParam("displayName") String displayName
 ,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return delegate.registerUser(displayName,username,password,email,securityContext);
+        return delegate.registerUser(username,password,email,displayName,securityContext);
     }
     @DELETE
     
@@ -126,10 +126,10 @@ public class UserApi  {
         return delegate.loginUser(username,password,securityContext);
     }
     @GET
-    @Path("/verify/{verificationHash}")
+    @Path("/verify/{token}")
     @Consumes({ "application/json" })
     @Produces({ "application/json" })
-    @io.swagger.annotations.ApiOperation(value = "", notes = "Verify a user's account.", response = Boolean.class, tags={  })
+    @io.swagger.annotations.ApiOperation(value = "", notes = "Verify a user's token.", response = Boolean.class, tags={  })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "verification response", response = Boolean.class),
         
@@ -138,9 +138,9 @@ public class UserApi  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "unexpected error", response = Boolean.class) })
 
     public Response verifyUser(
-@ApiParam(value = "Verification hash of account",required=true) @PathParam("verificationHash") String verificationHash,@Context SecurityContext securityContext)
+@ApiParam(value = "Verification token of account is still active",required=true) @PathParam("token") String token,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return delegate.verifyUser(verificationHash,securityContext);
+        return delegate.verifyUser(token,securityContext);
     }
     @GET
     @Path("/{targetUserId}")

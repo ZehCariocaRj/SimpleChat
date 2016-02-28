@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent" android:weightSum="1">
+
+    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/banner"
+               android:background="@drawable/banner"
+               android:layout_weight="0.10" android:layout_gravity="center_horizontal" android:adjustViewBounds="false"
+               android:baselineAlignBottom="false" android:cropToPadding="false"/>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/usernameField"
+              android:layout_weight="0.10" android:editable="true"
+              android:autoText="true" android:hint="Username"/>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/displayNameField"
+              android:layout_weight="0.10" android:editable="true" android:autoText="true" android:hint="Display name"
+              android:layout_gravity="center_horizontal"/>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textPassword"
+              android:ems="10" android:id="@+id/passwordField"
+              android:layout_weight="0.10" android:hint="Password"/>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textPassword"
+              android:ems="10" android:id="@+id/passwordConfirmField" android:layout_weight="0.10" android:hint="Password Confirmation"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/emailField" android:layout_gravity="center_horizontal" android:layout_weight="0.10"
+            android:hint="Email address"/>
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Register"
+            android:id="@+id/registerButton" android:layout_gravity="center_horizontal" android:layout_weight="0.10"/>
+</LinearLayout>

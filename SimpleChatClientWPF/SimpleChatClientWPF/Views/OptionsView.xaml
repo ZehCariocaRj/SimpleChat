@@ -52,11 +52,8 @@
         </StackPanel>
 
 
-        <StackPanel Grid.Row="6" Grid.ColumnSpan="2">
-            <Label Content="Email Address" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding Email}"/>
-        </StackPanel>
-        
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="2"/>
+
         <StackPanel Grid.Row="7" Grid.ColumnSpan="2">
             <TextBlock></TextBlock>
             <CheckBox Content=" Automatically sign in" Padding="0,0,0,8" IsChecked="{Binding AutomaticSignIn}"/>
