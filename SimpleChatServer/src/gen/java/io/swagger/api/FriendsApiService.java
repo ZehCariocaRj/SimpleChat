@@ -19,7 +19,7 @@ import com.sun.jersey.multipart.FormDataParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-02-28T08:28:34.608-05:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-03-02T06:39:20.385-05:00")
 public abstract class FriendsApiService {
   
       public abstract Response getMyFriends(String token,SecurityContext securityContext)

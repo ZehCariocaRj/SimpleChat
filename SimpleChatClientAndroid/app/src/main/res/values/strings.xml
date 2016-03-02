@@ -17,4 +17,6 @@
     </string>
     <string name="prompt_username">Username</string>
     <string name="title_activity_chat">ChatActivity</string>
+    <string name="action_change_title">Change chat title</string>
+    <string name="action_invite_user">Invite user</string>
 </resources>

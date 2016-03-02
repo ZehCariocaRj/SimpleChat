@@ -27,8 +27,6 @@ import andromeda.com.simplechatclientandroid.R;
 import io.swagger.client.model.Chat;
 import io.swagger.client.model.UserProfile;
 
-import static java.security.AccessController.getContext;
-
 public class MainActivity extends AppCompatActivity {
     private UpdateProfileTask mUpdateProfileTask = null;
     private UpdateChatTask mUpdateChatTask = null;
@@ -81,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("SimpleChat_Main", "Clicked: " + chat.getChatTitle());
 
                 Intent chatIntent = new Intent(view.getContext(), ChatActivity.class);
+                chatIntent.putExtra("chat_id", chat.getId());
                 startActivity(chatIntent);
             }
         });
@@ -156,7 +155,14 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected List<Chat> doInBackground(Void... params) {
-            return ApiGateway.getChats();
+            List<Chat> chats = ApiGateway.getChats();
+
+            for(int i = 0; i < chats.size(); i++) {
+                Chat chat = chats.get(i);
+                chat.setChatTitle(Utils.getUtf8String(chat.getChatTitle()));
+            }
+
+            return chats;
         }
 
         @Override
