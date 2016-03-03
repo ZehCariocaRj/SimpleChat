@@ -213,7 +213,8 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... params) {
             if(mTokenLogin) {
-                return ApiGateway.LoginUserByToken();
+                if(ApiGateway.LoginUserByToken())
+                    return true;
             }
 
             if(mDoRegistration)

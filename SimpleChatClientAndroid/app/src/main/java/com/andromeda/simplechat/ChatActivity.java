@@ -2,6 +2,7 @@ package com.andromeda.simplechat;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -88,8 +90,7 @@ public class ChatActivity extends AppCompatActivity {
             Log.e("SimpleChat_Chat", "Invalid chat id: " + chatId);
         }
 
-        mGetChatTask = new GetChatTask(chatId);
-        mGetChatTask.execute((Void) null);
+        updateChat();
 
         mMessageEditText = (EditText)findViewById(R.id.message_send_text);
 
@@ -136,8 +137,43 @@ public class ChatActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.action_change_title) {
+            Intent chatChangeTitleIntent = new Intent(this, ChatChangeTitleActivity.class);
+            chatChangeTitleIntent.putExtra("chat_id", chatId);
+            chatChangeTitleIntent.putExtra("chat_title", mToolbar.getTitle());
+            startActivityForResult(chatChangeTitleIntent, 1);
+        } else if(id == R.id.action_invite_user) {
+            Intent chatInviteIntent = new Intent(this, ChatInviteActivity.class);
+            chatInviteIntent.putExtra("chat_id", chatId);
+            startActivity(chatInviteIntent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            // Update chat title
+            updateChat();
+            Log.d("SimpleChat_Chat", "Updating chat title");
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    void updateChat() {
+        mGetChatTask = new GetChatTask(chatId);
+        mGetChatTask.execute((Void) null);
+    }
+
+
     /**
-     * Get mChat information
+     * Get chat information
      */
     public class GetChatTask extends AsyncTask<Void, Void, Chat> {
         private int chatId;
@@ -201,7 +237,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     /**
-     * Get mChat messages from server
+     * Get chat messages from server
      */
     public class GetMessagesTask extends AsyncTask<Void, Void, List<MessageFull>> {
         private int chatId;

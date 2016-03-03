@@ -853,13 +853,15 @@ public class Database {
             return res;
 
         try {
-
             PreparedStatement statement = null;
             statement = conn.prepareStatement("INSERT INTO participants (chatid, participant) VALUES (?,?)");
             statement.setInt(1, chatId);
             statement.setInt(2, userId);
             statement.executeUpdate();
             res = 1;
+        } catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e) {
+            // User is already in chat
+            res = -2;
         } catch (SQLException e) {
             System.out.println(e);
         }

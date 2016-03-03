@@ -28,6 +28,22 @@
         <activity
             android:name="com.andromeda.simplechat.ChatActivity"
             android:label="@string/title_activity_chat"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.andromeda.simplechat.ChatInviteActivity"
+            android:label="@string/title_activity_chat_invite"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.andromeda.simplechat.ChatChangeTitleActivity"
+            android:label="@string/title_activity_chat_change_title"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.andromeda.simplechat.SettingsMenuActivity"
+            android:label="@string/title_activity_settings_menu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.andromeda.simplechat.CreateChatActivity"
+            android:label="@string/title_activity_create_chat"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

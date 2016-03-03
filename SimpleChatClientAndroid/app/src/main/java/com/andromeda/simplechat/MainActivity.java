@@ -35,12 +35,17 @@ public class MainActivity extends AppCompatActivity {
     private TextView mUsernameView;
     private TextView mDisplayNameView;
     private ListView mChatListView;
+    private Context mContext;
+
+    private boolean mPostLogin = false;
 
     private ChatArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mContext = this;
 
         ApiGateway.setSharedPreferences(getPreferences(Context.MODE_PRIVATE));
 
@@ -56,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Let you add a new chat easily
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                // Let you add a new chat easily by pressing floating action button
+                Intent createChatIntent = new Intent(mContext, CreateChatActivity.class);
+                startActivityForResult(createChatIntent, 3);
             }
         });
 
@@ -76,8 +81,6 @@ public class MainActivity extends AppCompatActivity {
                 // Load chat
                 Chat chat = (Chat)parent.getItemAtPosition(position);
 
-                Log.d("SimpleChat_Main", "Clicked: " + chat.getChatTitle());
-
                 Intent chatIntent = new Intent(view.getContext(), ChatActivity.class);
                 chatIntent.putExtra("chat_id", chat.getId());
                 startActivity(chatIntent);
@@ -87,11 +90,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mUpdateProfileTask = new UpdateProfileTask();
-        mUpdateProfileTask.execute((Void) null);
-
-        mUpdateChatTask = new UpdateChatTask();
-        mUpdateChatTask.execute((Void) null);
+        if(requestCode == 2 && resultCode == 1) {
+            // Logout
+            Log.d("SimpleChat_Main", "Logging out...");
+            Intent mainIntent = new Intent(this, MainActivity.class);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(mainIntent);
+        } else {
+            mPostLogin = true;
+            mUpdateProfileTask = new UpdateProfileTask();
+            mUpdateProfileTask.execute((Void) null);
+            updateChatList();
+        }
     }
 
     @Override
@@ -110,10 +121,25 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent openSettingsIntent = new Intent(this, SettingsMenuActivity.class);
+            openSettingsIntent.putExtra("display_name", mDisplayNameView.getText());
+            startActivityForResult(openSettingsIntent, 2);
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(mPostLogin && ApiGateway.getToken() != null)
+            updateChatList();
+    }
+
+    void updateChatList() {
+        mUpdateChatTask = new UpdateChatTask();
+        mUpdateChatTask.execute((Void) null);
     }
 
     /**
@@ -134,8 +160,8 @@ public class MainActivity extends AppCompatActivity {
             mUpdateProfileTask = null;
 
             if(profile != null) {
-                mUsernameView.setText(profile.getUsername());
-                mDisplayNameView.setText(profile.getDisplayName());
+                mUsernameView.setText(Utils.getUtf8String(profile.getUsername()));
+                mDisplayNameView.setText(Utils.getUtf8String(profile.getDisplayName()));
             }
         }
 
@@ -168,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(final List<Chat> chats) {
             mUpdateChatTask = null;
+            adapter.clear();
             adapter.addAll(chats);
         }
 

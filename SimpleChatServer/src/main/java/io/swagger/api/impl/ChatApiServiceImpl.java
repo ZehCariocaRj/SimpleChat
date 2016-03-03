@@ -104,6 +104,9 @@ public class ChatApiServiceImpl extends ChatApiService {
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
+        if(userIds == null)
+            userIds = new ArrayList<Integer>();
+
         userIds.add(currentUser.getUserId()); // Add self to group if needed
 
         int chatId = Database.createChatGroup(chatTitle, userIds);
@@ -131,7 +134,7 @@ public class ChatApiServiceImpl extends ChatApiService {
 
         int res = Database.inviteUserToChat(chatId, username);
 
-        if(res ==0) {
+        if(res == 0) {
             Error error = new Error();
             error.setCode(602);
             error.setMessage("Could not invite user.");
@@ -140,6 +143,11 @@ public class ChatApiServiceImpl extends ChatApiService {
             Error error = new Error();
             error.setCode(403);
             error.setMessage("User does not exist.");
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
+        } else if(res == -2) {
+            Error error = new Error();
+            error.setCode(604);
+            error.setMessage("User already exist in chat.");
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
 
