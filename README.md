@@ -18,7 +18,16 @@ Screenshots:
 
 
 ###Android Client  
-Not yet started.  
+
+Currently the Android client has the same features as the WPF client, minus a way to see all of the users currently in a chat.
+
+![Login/Register](http://i.imgur.com/tbJOyRB.jpg)
+![Edit Profile/Options](http://i.imgur.com/LtngbLL.jpg)
+![Main screen](http://i.imgur.com/FDDlwFt.jpg)
+![Chatrooms](http://i.imgur.com/Tszd6TG.jpg)
+![Create Chat](http://i.imgur.com/Il22uQU.jpg)
+![Change Chat Title](http://i.imgur.com/T6Q1d9N.jpg)
+![Invite User](http://i.imgur.com/4QxsvIw.jpg)
 
 ###iOS Client  
 Not yet start.  
